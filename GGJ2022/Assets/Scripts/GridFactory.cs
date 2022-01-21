@@ -11,6 +11,7 @@ namespace GridSystem {
         public float cellSize;
         public Transform origin;
         public GridFactory otherGridFactory;
+        public bool LeftOrRight;
         [Header("Prefabs")]
         public GameObject wallPrefab;
         private bool[,] gridArray;
@@ -46,8 +47,18 @@ namespace GridSystem {
 
         public void SetGridObject(int x, int y, GameObject prefab)
         {
-            if(gridArray[x,y] == false)
-                Instantiate(prefab, GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * 0.5f, Quaternion.identity, origin);
+            if (gridArray[x, y] == false)
+            {
+                GameObject o = Instantiate(prefab, GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * 0.5f, Quaternion.identity, origin);
+                GridObject gridObject = o.GetComponent<GridObject>();
+                gridObject.x = x;
+                gridObject.y = y;
+                gridObject.LeftOrRight = LeftOrRight;
+            }
+            else
+            {
+                Debug.LogError("There have been a gridObject.");
+            }
         }
     }
 }

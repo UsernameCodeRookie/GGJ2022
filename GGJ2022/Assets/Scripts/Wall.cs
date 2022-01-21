@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wall : MonoBehaviour
+namespace GridSystem
 {
-    private void OnCollisionEnter2D(Collision2D collision)
+    public class Wall : GridObject
     {
-        
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+
+        }
     }
 }
