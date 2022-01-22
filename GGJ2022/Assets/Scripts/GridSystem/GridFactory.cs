@@ -137,24 +137,29 @@ namespace GridSystem {
                 }
             }
 
+            #region Boundary
+
+            GameObject b = LeftOrRight ? Boundary.instance.BoundaryL : Boundary.instance.BoundaryR;
+
             for (int x = -1; x <= width; x++)
             {
-                GameObject o = Instantiate(wallPrefab, GetWorldPosition(x, -1) + new Vector3(cellSize, cellSize) * 0.5f, Quaternion.identity, Boundary.instance.transform);
+                GameObject o = Instantiate(b, GetWorldPosition(x, -1) + new Vector3(cellSize, cellSize) * 0.5f, Quaternion.identity, Boundary.instance.transform);
                 o.transform.localScale = Vector3.one * cellSize;
 
-                GameObject t = Instantiate(wallPrefab, GetWorldPosition(x, height) + new Vector3(cellSize, cellSize) * 0.5f, Quaternion.identity, Boundary.instance.transform);
+                GameObject t = Instantiate(b, GetWorldPosition(x, height) + new Vector3(cellSize, cellSize) * 0.5f, Quaternion.identity, Boundary.instance.transform);
                 t.transform.localScale = Vector3.one * cellSize;
             }
 
             for (int y = 0; y < height; y++)
             {
-                GameObject o = Instantiate(wallPrefab, GetWorldPosition(-1, y) + new Vector3(cellSize, cellSize) * 0.5f, Quaternion.identity, Boundary.instance.transform);
+                GameObject o = Instantiate(b, GetWorldPosition(-1, y) + new Vector3(cellSize, cellSize) * 0.5f, Quaternion.identity, Boundary.instance.transform);
                 o.transform.localScale = Vector3.one * cellSize;
 
-                GameObject t = Instantiate(wallPrefab, GetWorldPosition(width, y) + new Vector3(cellSize, cellSize) * 0.5f, Quaternion.identity, Boundary.instance.transform);
+                GameObject t = Instantiate(b, GetWorldPosition(width, y) + new Vector3(cellSize, cellSize) * 0.5f, Quaternion.identity, Boundary.instance.transform);
                 t.transform.localScale = Vector3.one * cellSize;
             }
 
+            #endregion
         }
     }
 }

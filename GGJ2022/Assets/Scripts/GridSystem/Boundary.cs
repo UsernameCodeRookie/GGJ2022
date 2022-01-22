@@ -8,6 +8,9 @@ namespace GridSystem
     {
         public static Boundary instance;
 
+        public GameObject BoundaryL;
+        public GameObject BoundaryR;
+
         private void Start()
         {
             instance = this;

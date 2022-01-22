@@ -9,9 +9,9 @@ namespace Gameplay
     {
         private Vector3 direction;
         private float speed;
+        private float attackRadius;
 
         private PlayerScript playerScript;
-        private Collider2D playerCollider;
 
         private string Horizontal, Vertical;
         private KeyCode rushKey, attackKey;
@@ -20,13 +20,15 @@ namespace Gameplay
         public bool loseControl;
         public bool isRushing;
 
+        public Attack attackPrefab;
+
         private void Start()
         {
             direction = new Vector3(0, -1f, 0);
 
             playerScript = GetComponent<PlayerScript>();
-            playerCollider = GetComponent<Collider2D>();
             playerScript.Init();
+            attackRadius = playerScript.data.atkRad;
 
             if (LeftOrRight)
             {
@@ -57,6 +59,11 @@ namespace Gameplay
                 isRushing = false;
                 speed = playerScript.speed;
             }
+
+            if (Input.GetKeyDown(attackKey))
+            {
+                Instantiate(attackPrefab).Init(transform.position, attackRadius);
+            }
         }
 
         private void FixedUpdate()
@@ -69,16 +76,18 @@ namespace Gameplay
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (!collision.gameObject.GetComponent<Wall>()) return;
-            direction = Vector3.Reflect(direction, collision.contacts[0].normal);
-            StartCoroutine("LoseControl");
-            if (isRushing)
+            if (collision.gameObject.GetComponent<Wall>())
             {
-                playerScript.BeDamaged(2);
-            }
-            else
-            {
-                playerScript.BeDamaged(1);
+                direction = Vector3.Reflect(direction, collision.contacts[0].normal);
+                StartCoroutine("LoseControl");
+                if (isRushing)
+                {
+                    playerScript.BeDamaged(2);
+                }
+                else
+                {
+                    playerScript.BeDamaged(1);
+                }
             }
         }
 

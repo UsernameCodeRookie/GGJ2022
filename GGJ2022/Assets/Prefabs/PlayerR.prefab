@@ -114,6 +114,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LeftOrRight: 0
+  loseControl: 0
+  isRushing: 0
+  attackPrefab: {fileID: 9052925655696931700, guid: 2ddd7264488a2bf44889250e5529cce5, type: 3}
 --- !u!1 &1479682204665926869
 GameObject:
   m_ObjectHideFlags: 0

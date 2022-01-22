@@ -196,3 +196,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LeftOrRight: 1
+  loseControl: 0
+  isRushing: 0
+  attackPrefab: {fileID: 4730501586275726648, guid: 43876c0d5af46df408b07f0829dd4f0f, type: 3}
