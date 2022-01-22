@@ -22,6 +22,7 @@ namespace GridSystem {
         /// ´ýÐÞ¸Ä
         /// </summary>
         private bool[,] gridArray;
+        [HideInInspector]
         public List<Vector2Int> emptyPosition;
 
         private void Update()
@@ -135,6 +136,25 @@ namespace GridSystem {
                     emptyPosition.Add(new Vector2Int(x, y));
                 }
             }
+
+            for (int x = -1; x <= width; x++)
+            {
+                GameObject o = Instantiate(wallPrefab, GetWorldPosition(x, -1) + new Vector3(cellSize, cellSize) * 0.5f, Quaternion.identity, Boundary.instance.transform);
+                o.transform.localScale = Vector3.one * cellSize;
+
+                GameObject t = Instantiate(wallPrefab, GetWorldPosition(x, height) + new Vector3(cellSize, cellSize) * 0.5f, Quaternion.identity, Boundary.instance.transform);
+                t.transform.localScale = Vector3.one * cellSize;
+            }
+
+            for (int y = 0; y < height; y++)
+            {
+                GameObject o = Instantiate(wallPrefab, GetWorldPosition(-1, y) + new Vector3(cellSize, cellSize) * 0.5f, Quaternion.identity, Boundary.instance.transform);
+                o.transform.localScale = Vector3.one * cellSize;
+
+                GameObject t = Instantiate(wallPrefab, GetWorldPosition(width, y) + new Vector3(cellSize, cellSize) * 0.5f, Quaternion.identity, Boundary.instance.transform);
+                t.transform.localScale = Vector3.one * cellSize;
+            }
+
         }
     }
 }
