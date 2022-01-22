@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        GameStart.AddListener(GridInitial);
+        GameStart.AddListener(() => GridInitial());
     }
 
     private void Start()

@@ -11,7 +11,7 @@ namespace GridSystem
         public GameObject BoundaryL;
         public GameObject BoundaryR;
 
-        private void Start()
+        private void Awake()
         {
             instance = this;
         }
