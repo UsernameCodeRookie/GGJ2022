@@ -14,6 +14,8 @@ namespace GridSystem {
         public bool LeftOrRight;
         [Header("Prefabs")]
         public GameObject wallPrefab;
+        public GameObject playerPrefab;
+        public GameObject fruitPrefab;
         private bool[,] gridArray;
 
 
@@ -23,6 +25,10 @@ namespace GridSystem {
             gridArray = new bool[width, height];
 
             SetGridObject(0, 0, wallPrefab);
+
+            SetGridObject(width / 2, height / 2, playerPrefab);
+
+            //SetGridObject(0, 0, wallPrefab);
         }
 
         private void Update()
@@ -45,20 +51,28 @@ namespace GridSystem {
             return new Vector3(x, y) * cellSize + origin.position;
         }
 
-        public void SetGridObject(int x, int y, GameObject prefab)
+        public void SetGridObject(int x, int y, GameObject prefab, bool cover = false)
         {
             if (gridArray[x, y] == false)
             {
                 GameObject o = Instantiate(prefab, GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * 0.5f, Quaternion.identity, origin);
+                o.transform.localScale = Vector3.one * cellSize;
                 GridObject gridObject = o.GetComponent<GridObject>();
                 gridObject.x = x;
                 gridObject.y = y;
                 gridObject.LeftOrRight = LeftOrRight;
+
+                gridArray[x, y] = cover;
             }
             else
             {
                 Debug.LogError("There have been a gridObject.");
             }
+        }
+
+        public bool GetGridObject(int x, int y)
+        {
+            return gridArray[x, y];
         }
     }
 }
