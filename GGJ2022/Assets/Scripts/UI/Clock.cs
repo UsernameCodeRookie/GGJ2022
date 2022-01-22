@@ -47,7 +47,7 @@ namespace UI
 
         public void Initialize()
         {
-            min = 10;
+            min = 3;
             sec = 0;
         }
     }
