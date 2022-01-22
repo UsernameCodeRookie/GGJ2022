@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 471751fcca002e9499b6017a04c1350a, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  initSpeed: 0
-  rushSpeed: 0
-  atkRad: 0
-  maxSp: 0
-  maxMp: 0
-  maxHp: 0
-  mpRate: 0
-  atkCnt: 0
-  SpDecreaseAmount: 0
-  LoseControlTime: 0
+  initSpeed: 1
+  rushSpeed: 2
+  atkRad: 1
+  maxSp: 5
+  maxMp: 5
+  maxHp: 10
+  mpRate: 5
+  atkCnt: 2
+  SpDecreaseAmount: 1
+  LoseControlTime: 1

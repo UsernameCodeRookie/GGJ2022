@@ -116,7 +116,8 @@ MonoBehaviour:
   LeftOrRight: 0
   loseControl: 0
   isRushing: 0
-  attackPrefab: {fileID: 9052925655696931700, guid: 2ddd7264488a2bf44889250e5529cce5, type: 3}
+  attackPrefab: {fileID: 1014279457818184539, guid: 2ddd7264488a2bf44889250e5529cce5, type: 3}
+  _attackPrefab: {fileID: 3751461404392962034, guid: 33ca234503fac364398e79bb7844d036, type: 3}
 --- !u!1 &1479682204665926869
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
     private FruitGenerate fruitGenerateL, fruitGenerateR;
     public FruitGenerateSO fruitGenerateSO;
 
+    [HideInInspector]
+    public Vector3 originOffset;
+
     [Header("Fruits")]
     public List<Fruit> fruitsL, fruitsR;
 
@@ -109,6 +112,8 @@ public class GameManager : MonoBehaviour
 
         fruitGenerateL.UpdateTimerEvent.AddListener(() => GeneratFruit(left, fruitGenerateL, fruitsL));
         fruitGenerateR.UpdateTimerEvent.AddListener(() => GeneratFruit(right, fruitGenerateR, fruitsR));
+
+        originOffset = left.origin.position - right.origin.position;
     }
     
 }

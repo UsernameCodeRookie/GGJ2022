@@ -535,10 +535,11 @@ MonoBehaviour:
   gridFactoryRightPrefab: {fileID: 3752316042683146458, guid: 0b9d69fa56def61438ed02346375f50b, type: 3}
   left: {fileID: 375506967164807912, guid: 30f9b24bec7fe3145beff559b79b6905, type: 3}
   right: {fileID: 3752316042683146405, guid: 0b9d69fa56def61438ed02346375f50b, type: 3}
-  width: 15
-  height: 15
-  cellSize: 0.5
+  width: 10
+  height: 30
+  cellSize: 0.3
   fruitGenerateSO: {fileID: 11400000, guid: abb2ff7ad48dd9b4a98fd813fed335b7, type: 2}
+  originOffset: {x: 0, y: 0, z: 0}
   fruitsL: []
   fruitsR: []
   GameStart:
@@ -587,6 +588,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a49bd6732557fb40980cffe574571af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BoundaryL: {fileID: 1572657918499611663, guid: 446ff456fd588b049a5e2e06d33355f3, type: 3}
+  BoundaryR: {fileID: 7538461985584070063, guid: 494476483b65ff54b988873ba1b5ecd2, type: 3}
 --- !u!4 &2132079579
 Transform:
   m_ObjectHideFlags: 0

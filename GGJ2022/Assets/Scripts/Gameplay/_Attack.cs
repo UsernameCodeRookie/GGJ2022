@@ -5,7 +5,7 @@ using GridSystem;
 
 namespace Gameplay
 {
-    public class Attack : MonoBehaviour
+    public class _Attack : MonoBehaviour
     {
 
         private float attackRadius;
@@ -15,14 +15,17 @@ namespace Gameplay
 
         private Collider2D playerCollider;
         private Transform followTarget;
+        private bool LeftOrRight;
 
+        private AnimationCurve curve;
         public AttackSO so;
 
-        public void Init(Transform transform, float attackRadius)
+        public void Init(Transform transform, float attackRadius, bool LeftOrRight)
         {
             followTarget = transform;
             this.lingerTime = 0f;
             this.attackRadius = attackRadius;
+            this.LeftOrRight = LeftOrRight;
             CheckEndTime = so.curve.keys[1].time;
             AttackEndTime = so.AttackEndTime;
             playerCollider = GetComponent<Collider2D>();
@@ -30,10 +33,18 @@ namespace Gameplay
 
         private void FixedUpdate()
         {
-            this.transform.position = followTarget.position;
+            Vector3 offset = GameManager.instance.originOffset;
+            if (LeftOrRight)
+            {
+                this.transform.position = followTarget.position - offset;
+            }
+            else
+            {
+                this.transform.position = followTarget.position + offset;
+            }
             lingerTime += Time.deltaTime;
 
-            if(lingerTime >= AttackEndTime)
+            if (lingerTime >= AttackEndTime)
             {
                 GameObject.Destroy(gameObject);
                 return;
@@ -51,10 +62,10 @@ namespace Gameplay
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            Wall o = collision.gameObject.GetComponent<Wall>();
+            var o = collision.gameObject.GetComponent<PlayerScript>();
             if (o != null)
             {
-                o.Transfer();
+                o.BeDamaged(1);
             }
         }
 

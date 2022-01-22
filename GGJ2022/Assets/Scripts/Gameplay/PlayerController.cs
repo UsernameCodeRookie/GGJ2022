@@ -21,6 +21,7 @@ namespace Gameplay
         public bool isRushing;
 
         public Attack attackPrefab;
+        public _Attack _attackPrefab;
 
         private void Start()
         {
@@ -62,7 +63,8 @@ namespace Gameplay
 
             if (Input.GetKeyDown(attackKey))
             {
-                Instantiate(attackPrefab).Init(transform.position, attackRadius);
+                Instantiate(attackPrefab).Init(transform, attackRadius);
+                Instantiate(_attackPrefab).Init(transform, attackRadius, LeftOrRight);
             }
         }
 
