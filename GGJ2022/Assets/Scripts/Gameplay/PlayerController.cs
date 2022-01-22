@@ -6,6 +6,7 @@ using GridSystem;
 
 namespace Gameplay
 {
+    [RequireComponent(typeof(PlayerScript))]
     public class PlayerController : MonoBehaviour
     {
         private Vector3 direction;
@@ -26,12 +27,14 @@ namespace Gameplay
 
         public UnityEvent AttackEvent;
 
+        public UnityEvent Collision;
+
         private void Start()
         {
             direction = new Vector3(0, -1f, 0);
 
             playerScript = GetComponent<PlayerScript>();
-            playerScript.Init();
+            playerScript.Init(bool LeftOrRight);
             attackRadius = playerScript.data.atkRad;
             AttackEvent.AddListener(() => Instantiate(attackPrefab).Init(transform.position, attackRadius));
             AttackEvent.AddListener(() => Instantiate(_attackPrefab).Init(transform.position, attackRadius, LeftOrRight));
@@ -96,8 +99,11 @@ namespace Gameplay
                     playerScript.BeDamaged(1);
                     playerScript.Hurt.Invoke();
                 }
+
+                Collision.Invoke();
             }
         }
+
 
         IEnumerator LoseControl()
         {
