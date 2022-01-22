@@ -10,9 +10,14 @@ namespace Gameplay
 	{
 		public PlayerDataSO data;
 
-		public float speed, rushSpeed, sp, mp;
+        [Header("UI Display Variables")]
+		public float sp, mp;
 		public int hp;
+        public int availableAttackCount = 1;
 
+
+        public float speed;
+        public float rushSpeed;
 		public float spDecreaseAmount;
 		public UnityEvent Hurt;
 		private bool LeftOrRight;
@@ -62,9 +67,21 @@ namespace Gameplay
 		public void GetFruit()
 		{
 			mp += data.mpRecover;
-			if (mp > data.maxMp) mp = data.maxMp;
-			sp = data.spRecover;
+            if (mp > data.maxMp)
+            {
+                mp = 0;
+                availableAttackCount++;
+            }
+			sp += data.spRecover;
+            if (sp > data.maxSp)
+                sp = data.maxSp;
 		}
+
+        public void DecreaseAvailableAttackCount()
+        {
+            if(availableAttackCount >= 1)
+                availableAttackCount--;
+        }
 
 		public void BeDamaged(int amount)
 		{
