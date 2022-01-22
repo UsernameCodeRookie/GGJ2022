@@ -62,9 +62,9 @@ namespace GridSystem {
 
         #region SetGridObject
 
-        public void SetGridObject(int x, int y, GameObject prefab)
+        public void SetGridObject(int x, int y, GameObject prefab, bool cover = false)
         {
-            if (gridArray[x, y] == false)
+            if (gridArray[x, y] == false | cover == true)
             {
                 GameObject o = Instantiate(prefab, GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * 0.5f, Quaternion.identity, origin);
                 o.transform.localScale = Vector3.one * cellSize;
