@@ -4,6 +4,8 @@ using UnityEngine;
 using Gameplay;
 
 public class PlayerCtrlL:MonoBehaviour{
+	public GameUI UI;
+	
 	private PlayerScript sc;
 	private Vector3 dir;
 	
@@ -11,6 +13,7 @@ public class PlayerCtrlL:MonoBehaviour{
         dir=new Vector3(0,-1,0);
 		sc=gameObject.GetComponent<PlayerScript>();
 		sc.Init();
+		UI.Init(sc);
     }
 	
     void Update(){

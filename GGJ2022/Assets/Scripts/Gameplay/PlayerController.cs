@@ -8,6 +8,7 @@ namespace Gameplay
 {
     public class PlayerController : MonoBehaviour
     {
+	
         private Vector3 direction;
         private float speed;
         private float attackRadius;
@@ -32,6 +33,7 @@ namespace Gameplay
 
             playerScript = GetComponent<PlayerScript>();
             playerScript.Init();
+//			UI.Init(playerScript);
             attackRadius = playerScript.data.atkRad;
             AttackEvent.AddListener(() => Instantiate(attackPrefab).Init(transform.position, attackRadius));
             AttackEvent.AddListener(() => Instantiate(_attackPrefab).Init(transform.position, attackRadius, LeftOrRight));
