@@ -9,15 +9,22 @@ namespace GridSystem
     public class Wall : GridObject
     {
         public bool isBoundary;
-        public MMFeedbacks mMFeedbacks;
+        private MMFeedbacks mMFeedbacks;
 
         void Awake()
         {
             if (!isBoundary)
             {
                 mMFeedbacks = gameObject.GetComponent<MMFeedbacks>();
-                mMFeedbacks.PlayFeedbacks();
+                StartCoroutine("FeedBack");
             }
+        }
+
+        IEnumerator FeedBack()
+        {
+            yield return 0;
+            mMFeedbacks.PlayFeedbacks();
+            yield return 0;
         }
 
         public void Transfer()
