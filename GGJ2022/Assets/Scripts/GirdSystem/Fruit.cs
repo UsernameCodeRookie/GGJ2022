@@ -16,12 +16,21 @@ namespace GridSystem
             {
                 SetWallInGrid(left);
             }
-            Destroy(gameObject);
+            gameManager.fruitsL.Remove(this);
+            gameManager.fruitsR.Remove(this);
+            Disappear();
         }
 
         private void SetWallInGrid(GridFactory gridFactory)
         {
-            gridFactory.SetGridObject(x, y, gridFactory.wallPrefab);
+            gridFactory.SetGridObject(x, y, gridFactory.wallPrefab, true);
+        }
+
+        public void Disappear()
+        {
+            left.SetEmptyGridObject(x, y);
+            right.SetEmptyGridObject(x, y);
+            Destroy(gameObject);
         }
     }
 }

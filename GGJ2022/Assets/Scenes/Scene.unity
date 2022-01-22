@@ -156,11 +156,12 @@ MonoBehaviour:
   height: 18
   cellSize: 0.5
   origin: {fileID: 1432065227}
-  otherGridFactory: {fileID: 0}
+  otherGridFactory: {fileID: 1335409445}
   LeftOrRight: 0
   wallPrefab: {fileID: 4231940020290734356, guid: 824e2f79f4bb8b845af22b3648307a5b, type: 3}
   playerPrefab: {fileID: 1479682204570871418, guid: 86a5a3358a7a3274cb4c5a5476f70efb, type: 3}
   fruitPrefab: {fileID: 4622636853887829289, guid: a15747a8eca4edc48a070bf729f1a806, type: 3}
+  emptyPosition: []
 --- !u!4 &44580673
 Transform:
   m_ObjectHideFlags: 0
@@ -322,11 +323,12 @@ MonoBehaviour:
   height: 18
   cellSize: 0.5
   origin: {fileID: 1069417225}
-  otherGridFactory: {fileID: 0}
+  otherGridFactory: {fileID: 44580672}
   LeftOrRight: 1
   wallPrefab: {fileID: 5005168806409928148, guid: e4abb019e8023c843a07a56ddb37ced4, type: 3}
   playerPrefab: {fileID: 3813551134934191269, guid: 1e11458e105934a418a0502e7eb2ed35, type: 3}
   fruitPrefab: {fileID: 2600305789697248784, guid: a0a469083d4e3564f889fd8e721521dc, type: 3}
+  emptyPosition: []
 --- !u!4 &1335409446
 Transform:
   m_ObjectHideFlags: 0
@@ -406,6 +408,10 @@ MonoBehaviour:
   width: 8
   height: 18
   cellSize: 0.5
+  fruitGenerateL: {fileID: 11400000, guid: d5f937297540c224fbebb9468868e5c5, type: 2}
+  fruitGenerateR: {fileID: 11400000, guid: dce170b1815591c4e9fbdf7b7706138e, type: 2}
+  fruitsL: []
+  fruitsR: []
 --- !u!4 &1632937755
 Transform:
   m_ObjectHideFlags: 0
