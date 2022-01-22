@@ -4,6 +4,8 @@ using UnityEngine;
 using Gameplay;
 
 public class PlayerCtrlL:MonoBehaviour{
+	public GameUI UI;
+	
 	private PlayerScript sc;
 	private Vector3 dir;
 	
