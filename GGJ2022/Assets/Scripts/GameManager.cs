@@ -114,8 +114,9 @@ public class GameManager : MonoBehaviour
     #region GridInitial
     private void GridInitial()
     {
-        GameObject L = Instantiate(gridFactoryLeftPrefab, Vector3.zero, Quaternion.identity);
-        GameObject R = Instantiate(gridFactoryRightPrefab, Vector3.zero, Quaternion.identity);
+        GameObject L = Instantiate(gridFactoryLeftPrefab, Vector3.zero, Quaternion.identity,gameObject.transform);
+        GameObject R = Instantiate(gridFactoryRightPrefab, Vector3.zero, Quaternion.identity,gameObject.transform);
+
 
         left = L.GetComponent<GridFactory>();
         right = R.GetComponent<GridFactory>();
