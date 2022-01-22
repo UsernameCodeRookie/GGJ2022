@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using GridSystem;
 
 namespace Gameplay
@@ -23,6 +24,8 @@ namespace Gameplay
         public Attack attackPrefab;
         public _Attack _attackPrefab;
 
+        public UnityEvent AttackEvent;
+
         private void Start()
         {
             direction = new Vector3(0, -1f, 0);
@@ -30,6 +33,8 @@ namespace Gameplay
             playerScript = GetComponent<PlayerScript>();
             playerScript.Init();
             attackRadius = playerScript.data.atkRad;
+            AttackEvent.AddListener(() => Instantiate(attackPrefab).Init(transform.position, attackRadius));
+            AttackEvent.AddListener(() => Instantiate(_attackPrefab).Init(transform.position, attackRadius, LeftOrRight));
 
             if (LeftOrRight)
             {
@@ -63,8 +68,7 @@ namespace Gameplay
 
             if (Input.GetKeyDown(attackKey))
             {
-                Instantiate(attackPrefab).Init(transform.position, attackRadius);
-                Instantiate(_attackPrefab).Init(transform.position, attackRadius, LeftOrRight);
+                AttackEvent.Invoke();
             }
         }
 
@@ -85,10 +89,12 @@ namespace Gameplay
                 if (isRushing)
                 {
                     playerScript.BeDamaged(2);
+                    playerScript.Hurt.Invoke();
                 }
                 else
                 {
                     playerScript.BeDamaged(1);
+                    playerScript.Hurt.Invoke();
                 }
             }
         }

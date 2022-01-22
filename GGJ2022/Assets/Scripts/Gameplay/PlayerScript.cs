@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Gameplay
 {
@@ -13,6 +14,8 @@ namespace Gameplay
 
 		public float spDecreaseAmount;
 
+		public UnityEvent Hurt;
+
 		public void Init()
 		{
 			speed = data.initSpeed;
@@ -22,6 +25,7 @@ namespace Gameplay
 			hp = data.maxHp;
 
 			spDecreaseAmount = data.SpDecreaseAmount;
+
 		}
 
 		public bool SpDrop()
