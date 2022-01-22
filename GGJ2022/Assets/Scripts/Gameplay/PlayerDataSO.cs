@@ -2,9 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerData", menuName = "ScriptableObject/PlayerDataSO", order = 1)]
+[CreateAssetMenu(fileName = "PlayerData", menuName = "Config/PlayerDataSO", order = 1)]
+public class PlayerDataSO : ScriptableObject{
+#if UNITY_EDITOR
+    [Multiline]
+    public string DeveloperDescription = "";
+#endif
 
-public class PlayerDataSO:ScriptableObject{
-    public float initSpeed,rushSpeed,atkRad,maxSp,maxMp,mpRate;
-    public int atkCnt;
+    [Header("Speed Config")]
+    public float initSpeed;
+    public float rushSpeedMultiplier;
+
+    [Header("Player Status Config")]
+    public int maxHp;
+    public float maxSp;
+    public float maxMp;
+    public float mpRecoverRate;
+
+    [Header("Speed Config")]
+    public float attackRadius;
+    public int plerMaxAttackCount;
 }

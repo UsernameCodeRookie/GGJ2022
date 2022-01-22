@@ -9,14 +9,14 @@ public class PlayerScript:MonoBehaviour{
 	public int hp;
 	
     public void Init(){
-		spd=data.initSpeed;
-		sp=data.maxSp;
-		mp=data.maxMp;
-		hp=3;
+		spd = data.initSpeed;
+		sp = 0;
+		mp = 0;
+		hp = data.maxHp;
     }
 	
     public void Upd(){
-		mp+=data.mpRate*Time.deltaTime;
+		mp+=data.mpRecoverRate*Time.deltaTime;
 		if(mp>data.maxMp)mp=data.maxMp;
     }
 

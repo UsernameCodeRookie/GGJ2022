@@ -239,8 +239,8 @@ MonoBehaviour:
   gridFactoryRightPrefab: {fileID: 3752316042683146458, guid: 0b9d69fa56def61438ed02346375f50b, type: 3}
   left: {fileID: 375506967164807912, guid: 30f9b24bec7fe3145beff559b79b6905, type: 3}
   right: {fileID: 3752316042683146405, guid: 0b9d69fa56def61438ed02346375f50b, type: 3}
-  width: 8
-  height: 18
+  width: 15
+  height: 15
   cellSize: 0.5
   fruitGenerateSO: {fileID: 11400000, guid: abb2ff7ad48dd9b4a98fd813fed335b7, type: 2}
   fruitsL: []
