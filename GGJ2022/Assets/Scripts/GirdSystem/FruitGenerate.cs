@@ -22,6 +22,7 @@ namespace GridSystem
         public float amountTimer;
 
 
+
         public bool UpdateTimer()
         {
             bool flag = false;
@@ -48,5 +49,10 @@ namespace GridSystem
             return flag;
         }
         
+
+        public void Init()
+        {
+            
+        }
     }
 }

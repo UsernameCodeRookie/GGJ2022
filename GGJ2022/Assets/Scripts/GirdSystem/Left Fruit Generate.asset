@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27cdc1d95ecf1b941b5c7ee68416c9a0, type: 3}
   m_Name: Left Fruit Generate
   m_EditorClassIdentifier: 
-  generateFrequency: 0
+  generateFrequency: 2380.8035
   generateTimer: 0
-  generateAmount: 0
-  frequencyVelocity: 0
-  frequencyAddAmount: 0
-  frequencyTimer: 0
+  generateAmount: 2
+  frequencyVelocity: 0.1
+  frequencyAddAmount: 0.1
+  frequencyTimer: 0.20000418
   amountVelocity: 0
   amountTimer: 0
