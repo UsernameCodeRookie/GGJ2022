@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GridSystem
 {
@@ -20,6 +21,13 @@ namespace GridSystem
         [Range(0, 1)]
         public float amountTimer;
 
+        public UnityEvent UpdateTimerEvent;
+
+        private void Update()
+        {
+            UpdateTimer();
+        }
+
         public void SetValue(FruitGenerateSO fruitGenerateSO)
         {
             generateFrequency = fruitGenerateSO.generateFrequency;
@@ -29,14 +37,16 @@ namespace GridSystem
             amountVelocity = fruitGenerateSO.amountVelocity;
         }
 
-        public bool UpdateTimer()
+        public void UpdateTimer()
         {
-            bool flag = false;
+            
             generateTimer += Time.deltaTime * generateFrequency;
 
-            if(generateTimer > 1)
+            while(generateTimer > 1)
             {
-                flag = true;
+                generateTimer -= 1;
+                UpdateTimerEvent.Invoke();
+
                 frequencyTimer += frequencyVelocity;
                 amountTimer += amountVelocity;
 
@@ -51,8 +61,6 @@ namespace GridSystem
                     generateAmount += 1;
                 }
             }
-
-            return flag;
         }
         
     }

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Fruit Generate SO
   m_EditorClassIdentifier: 
   DeveloperDescription: 
-  generateFrequency: 1
-  generateAmount: 1
+  generateFrequency: 0.2
+  generateAmount: 5
   frequencyVelocity: 0
   frequencyAddAmount: 0
   amountVelocity: 0

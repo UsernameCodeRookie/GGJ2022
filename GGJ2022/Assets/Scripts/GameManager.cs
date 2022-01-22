@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using GridSystem;
 
 public class GameManager : MonoBehaviour
@@ -18,26 +19,35 @@ public class GameManager : MonoBehaviour
     [Header("Fruits")]
     public List<Fruit> fruitsL, fruitsR;
 
+    public UnityEvent GameStart;
+
 
     private void Awake()
     {
         instance = this;
+        GameStart.AddListener(GridInitial);
     }
 
     private void Start()
     {
-        GameStart();
+        GameStart.Invoke();
     }
 
     private void Update()
     {
         //果子位置冲突逻辑：果子生成时会提供一个占位给对面，当果子刷新时消除占位
-        GeneratFruit(left, fruitGenerateL, fruitsL);
-        GeneratFruit(right, fruitGenerateR, fruitsR);
+        if(fruitsL.Count == 0)
+            GeneratFruit(left, fruitGenerateL, fruitsL);
+        if(fruitsR.Count == 0)
+            GeneratFruit(right, fruitGenerateR, fruitsR);
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            GameStart();
+            if (left != null) GameObject.Destroy(left.gameObject);
+            if (right != null) GameObject.Destroy(right.gameObject);
+            fruitsL.Clear();
+            fruitsR.Clear();
+            GameStart.Invoke();
         }
     }
 
@@ -47,7 +57,7 @@ public class GameManager : MonoBehaviour
         gridObject = null;
         if (gridFactory.emptyPosition.Count != 0)
         {
-            int index = (int)(Random.value * gridFactory.emptyPosition.Count);
+            int index = (int)(UnityEngine.Random.value * gridFactory.emptyPosition.Count);
             var position = gridFactory.emptyPosition[index];
             gridFactory.SetGridObject(index, gridFactory.fruitPrefab, out gridObject);
 
@@ -58,31 +68,26 @@ public class GameManager : MonoBehaviour
 
     public void GeneratFruit(GridFactory gridFactory, FruitGenerate fruitGenerate, List<Fruit> fruits)
     {
-        if (fruitGenerate.UpdateTimer() | fruits.Count == 0)
-        {
-            fruitGenerate.generateTimer = 0;
-            for (int i = fruits.Count - 1; i >= 0; i--)
-            {
-                Fruit fruit = fruits[i];
-                fruits.RemoveAt(i);
-                fruit.Disappear();
-            }
 
-            for (int i = 0; i < fruitGenerate.generateAmount; i++)
-            {
-                Fruit fruit;
-                RandomGenerateFruit(gridFactory, out fruit);
-                fruits.Add(fruit);
-            }
+        fruitGenerate.generateTimer = 0;
+        for (int i = fruits.Count - 1; i >= 0; i--)
+        {
+            Fruit fruit = fruits[i];
+            fruits.RemoveAt(i);
+            fruit.Disappear();
+        }
+
+        for (int i = 0; i < fruitGenerate.generateAmount; i++)
+        {
+            Fruit fruit;
+            RandomGenerateFruit(gridFactory, out fruit);
+            fruits.Add(fruit);
         }
     }
     #endregion
 
-    private void GameStart()
+    private void GridInitial()
     {
-        if (left != null) GameObject.Destroy(left.gameObject);
-        if (right != null) GameObject.Destroy(right.gameObject);
-
         GameObject L = Instantiate(gridFactoryLeftPrefab, Vector3.zero, Quaternion.identity);
         GameObject R = Instantiate(gridFactoryRightPrefab, Vector3.zero, Quaternion.identity);
 
@@ -101,6 +106,9 @@ public class GameManager : MonoBehaviour
 
         fruitGenerateL.SetValue(fruitGenerateSO);
         fruitGenerateR.SetValue(fruitGenerateSO);
+
+        fruitGenerateL.UpdateTimerEvent.AddListener(() => GeneratFruit(left, fruitGenerateL, fruitsL));
+        fruitGenerateR.UpdateTimerEvent.AddListener(() => GeneratFruit(right, fruitGenerateR, fruitsR));
     }
     
 }

@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   initSpeed: 2
-  rushSpeed: 0
+  rushSpeed: 4
   atkRad: 0
-  maxSp: 0
+  maxSp: 5
   maxMp: 10
+  maxHp: 8
   mpRate: 1
   atkCnt: 0
+  SpDecreaseAmount: 1
+  LoseControlTime: 1
