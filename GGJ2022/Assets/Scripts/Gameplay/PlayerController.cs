@@ -34,7 +34,7 @@ namespace Gameplay
             direction = new Vector3(0, -1f, 0);
 
             playerScript = GetComponent<PlayerScript>();
-            playerScript.Init(bool LeftOrRight);
+            playerScript.Init(LeftOrRight);
             attackRadius = playerScript.data.atkRad;
             AttackEvent.AddListener(() => Instantiate(attackPrefab).Init(transform.position, attackRadius));
             AttackEvent.AddListener(() => Instantiate(_attackPrefab).Init(transform.position, attackRadius, LeftOrRight));
