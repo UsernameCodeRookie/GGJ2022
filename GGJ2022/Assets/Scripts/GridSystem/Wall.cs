@@ -9,7 +9,7 @@ namespace GridSystem
     {
         public bool isBoundary;
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        public void Transfer()
         {
 
         }

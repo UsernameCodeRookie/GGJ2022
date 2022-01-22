@@ -47,15 +47,9 @@ namespace Gameplay
 
         }
 
-        private void OnCollisionEnter2D(Collision2D[] collisions)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
-            foreach (Collision2D collision in collisions)
-            {
-                if (collision.gameObject.GetComponent<Wall>())
-                {
 
-                }
-            }
         }
     }
 }
