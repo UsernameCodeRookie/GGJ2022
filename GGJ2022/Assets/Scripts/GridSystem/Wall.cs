@@ -15,7 +15,6 @@ namespace GridSystem
         {
             if (!isBoundary)
             {
-                mMFeedbacks = gameObject.GetComponent<MMFeedbacks>();
                 StartCoroutine("FeedBack");
             }
         }
@@ -23,6 +22,7 @@ namespace GridSystem
         IEnumerator FeedBack()
         {
             yield return 0;
+            mMFeedbacks = gameObject.GetComponentInChildren<MMFeedbacks>();
             mMFeedbacks.PlayFeedbacks();
             yield return 0;
         }

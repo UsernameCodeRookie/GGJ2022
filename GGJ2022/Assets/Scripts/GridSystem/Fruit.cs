@@ -2,11 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Gameplay;
+using MoreMountains.Feedbacks;
 
 namespace GridSystem
 {
     public class Fruit : GridObject
     {
+
+        private MMFeedbacks mMFeedbacks;
+
+        private void Awake()
+        {
+            StartCoroutine("FeedBack");
+        }
+
+        IEnumerator FeedBack()
+        {
+            yield return 0;
+            mMFeedbacks = gameObject.GetComponentInChildren<MMFeedbacks>();
+            mMFeedbacks.PlayFeedbacks();
+            yield return 0;
+        }
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
             var p = collision.gameObject.GetComponent<PlayerScript>();
