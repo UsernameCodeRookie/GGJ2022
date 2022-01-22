@@ -32,7 +32,7 @@ namespace Gameplay
 			speed = data.initSpeed;
 			rushSpeed = data.rushSpeed;
 			sp = data.maxSp;
-			mp = data.maxMp;
+			mp = 0;
 			hp = data.maxHp;
 
 			spDecreaseAmount = data.SpDecreaseAmount;
@@ -61,9 +61,9 @@ namespace Gameplay
 
 		public void GetFruit()
 		{
-			mp += 1f;
+			mp += data.mpRecover;
 			if (mp > data.maxMp) mp = data.maxMp;
-			sp = data.maxSp;
+			sp = data.spRecover;
 		}
 
 		public void BeDamaged(int amount)
