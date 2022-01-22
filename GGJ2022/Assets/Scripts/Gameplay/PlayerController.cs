@@ -63,8 +63,8 @@ namespace Gameplay
 
             if (Input.GetKeyDown(attackKey))
             {
-                Instantiate(attackPrefab).Init(transform, attackRadius);
-                Instantiate(_attackPrefab).Init(transform, attackRadius, LeftOrRight);
+                Instantiate(attackPrefab).Init(transform.position, attackRadius);
+                Instantiate(_attackPrefab).Init(transform.position, attackRadius, LeftOrRight);
             }
         }
 

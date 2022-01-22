@@ -14,13 +14,14 @@ namespace Gameplay
         private float AttackEndTime;
 
         private Collider2D playerCollider;
-        private Transform followTarget;
 
         public AttackSO so;
 
-        public void Init(Transform transform, float attackRadius)
+        public void Init(Vector3 position, float attackRadius)
         {
-            followTarget = transform;
+            transform.position = position;
+            transform.localScale = Vector3.zero;
+
             this.lingerTime = 0f;
             this.attackRadius = attackRadius;
             CheckEndTime = so.curve.keys[1].time;
@@ -30,7 +31,6 @@ namespace Gameplay
 
         private void FixedUpdate()
         {
-            this.transform.position = followTarget.position;
             lingerTime += Time.deltaTime;
 
             if(lingerTime >= AttackEndTime)

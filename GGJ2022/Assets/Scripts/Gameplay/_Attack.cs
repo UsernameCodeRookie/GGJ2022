@@ -14,15 +14,24 @@ namespace Gameplay
         private float AttackEndTime;
 
         private Collider2D playerCollider;
-        private Transform followTarget;
         private bool LeftOrRight;
 
         private AnimationCurve curve;
         public AttackSO so;
 
-        public void Init(Transform transform, float attackRadius, bool LeftOrRight)
+        public void Init(Vector3 position, float attackRadius, bool LeftOrRight)
         {
-            followTarget = transform;
+            Vector3 offset = GameManager.instance.originOffset;
+            if (LeftOrRight)
+            {
+                this.transform.position = position - offset;
+            }
+            else
+            {
+                this.transform.position = position + offset;
+            }
+
+            transform.localScale = Vector3.zero;
             this.lingerTime = 0f;
             this.attackRadius = attackRadius;
             this.LeftOrRight = LeftOrRight;
@@ -33,15 +42,6 @@ namespace Gameplay
 
         private void FixedUpdate()
         {
-            Vector3 offset = GameManager.instance.originOffset;
-            if (LeftOrRight)
-            {
-                this.transform.position = followTarget.position - offset;
-            }
-            else
-            {
-                this.transform.position = followTarget.position + offset;
-            }
             lingerTime += Time.deltaTime;
 
             if (lingerTime >= AttackEndTime)
