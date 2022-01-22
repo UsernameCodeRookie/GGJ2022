@@ -4,8 +4,7 @@ using UnityEngine;
 
 namespace GridSystem
 {
-    [CreateAssetMenu]
-    public class FruitGenerate : ScriptableObject
+    public class FruitGenerate : MonoBehaviour
     {
         [Header("Generate Settings")]
         public float generateFrequency;
@@ -21,6 +20,14 @@ namespace GridSystem
         [Range(0, 1)]
         public float amountTimer;
 
+        public void SetValue(FruitGenerateSO fruitGenerateSO)
+        {
+            generateFrequency = fruitGenerateSO.generateFrequency;
+            generateAmount = fruitGenerateSO.generateAmount;
+            frequencyVelocity = fruitGenerateSO.frequencyVelocity;
+            frequencyAddAmount = fruitGenerateSO.frequencyAddAmount;
+            amountVelocity = fruitGenerateSO.amountVelocity;
+        }
 
         public bool UpdateTimer()
         {

@@ -6,24 +6,27 @@ using GridSystem;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public GameObject gridFactoryLeftPrefab, gridFactoryRightPrefab;
+    [HideInInspector]
     public GridFactory left, right;
     public int width;
     public int height;
     public float cellSize;
-    public FruitGenerate fruitGenerateL, fruitGenerateR;
+    private FruitGenerate fruitGenerateL, fruitGenerateR;
+    public FruitGenerateSO fruitGenerateSO;
 
+    [Header("Fruits")]
     public List<Fruit> fruitsL, fruitsR;
 
 
     private void Awake()
     {
         instance = this;
-        left.width = width;
-        left.height = height;
-        left.cellSize = cellSize;
-        right.width = width;
-        right.height = height;
-        right.cellSize = cellSize;
+    }
+
+    private void Start()
+    {
+        GameStart();
     }
 
     private void Update()
@@ -31,17 +34,25 @@ public class GameManager : MonoBehaviour
         //果子位置冲突逻辑：果子生成时会提供一个占位给对面，当果子刷新时消除占位
         GeneratFruit(left, fruitGenerateL, fruitsL);
         GeneratFruit(right, fruitGenerateR, fruitsR);
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            GameStart();
+        }
     }
 
     #region GenerateFruit
     public bool RandomGenerateFruit(GridFactory gridFactory,out Fruit gridObject)
     {
         gridObject = null;
-        int index = (int)(Random.value * gridFactory.emptyPosition.Count);
-        var position = gridFactory.emptyPosition[index];
-        gridFactory.SetGridObject(index, gridFactory.fruitPrefab, out gridObject);
+        if (gridFactory.emptyPosition.Count != 0)
+        {
+            int index = (int)(Random.value * gridFactory.emptyPosition.Count);
+            var position = gridFactory.emptyPosition[index];
+            gridFactory.SetGridObject(index, gridFactory.fruitPrefab, out gridObject);
 
-        gridFactory.otherGridFactory.RemoveEmptyGridObject(position.x, position.y);
+            gridFactory.otherGridFactory.RemoveEmptyGridObject(position.x, position.y);
+        }
         return true;
     }
 
@@ -67,5 +78,29 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    private void GameStart()
+    {
+        if (left != null) GameObject.Destroy(left.gameObject);
+        if (right != null) GameObject.Destroy(right.gameObject);
+
+        GameObject L = Instantiate(gridFactoryLeftPrefab, Vector3.zero, Quaternion.identity);
+        GameObject R = Instantiate(gridFactoryRightPrefab, Vector3.zero, Quaternion.identity);
+
+        left = L.GetComponent<GridFactory>();
+        right = R.GetComponent<GridFactory>();
+
+        left.SetValue(width, height, cellSize);
+        left.Initialize();
+        left.otherGridFactory = right;
+        right.SetValue(width, height, cellSize);
+        right.Initialize();
+        right.otherGridFactory = left;
+
+        fruitGenerateL = L.GetComponent<FruitGenerate>();
+        fruitGenerateR = R.GetComponent<FruitGenerate>();
+
+        fruitGenerateL.SetValue(fruitGenerateSO);
+        fruitGenerateR.SetValue(fruitGenerateSO);
+    }
     
 }
