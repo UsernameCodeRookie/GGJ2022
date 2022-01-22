@@ -1,0 +1,14 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace GridSystem
+{
+    public class Wall : GridObject
+    {
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+
+        }
+    }
+}
