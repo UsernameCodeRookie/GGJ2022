@@ -14,7 +14,7 @@ namespace Gameplay
         private Collider2D playerCollider;
 
         private string Horizontal, Vertical;
-        private KeyCode rushKey;
+        private KeyCode rushKey, attackKey;
         public bool LeftOrRight;
 
         public bool loseControl;
@@ -32,13 +32,15 @@ namespace Gameplay
             {
                 Horizontal = "Horizontal L";
                 Vertical = "Vertical L";
-                rushKey = KeyCode.LeftShift;
+                rushKey = KeyCode.V;
+                attackKey = KeyCode.B;
             }
             else
             {
                 Horizontal = "Horizontal R";
                 Vertical = "Vertical R";
-                rushKey = KeyCode.RightShift;
+                rushKey = KeyCode.Alpha1;
+                attackKey = KeyCode.Alpha2;
             }
         }
 
