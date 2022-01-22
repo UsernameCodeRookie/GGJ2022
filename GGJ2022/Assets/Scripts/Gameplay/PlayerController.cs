@@ -13,7 +13,7 @@ namespace Gameplay
         private float speed;
         private float attackRadius;
 
-        private PlayerScript playerScript;
+        public PlayerScript playerScript;
 
         private string Horizontal, Vertical;
         private KeyCode rushKey, attackKey;
@@ -27,13 +27,13 @@ namespace Gameplay
 
         public UnityEvent AttackEvent;
 
+        public UnityEvent Collision;
+
         private void Start()
         {
             direction = new Vector3(0, -1f, 0);
 
-            playerScript = GetComponent<PlayerScript>();
-            playerScript.Init();
-//			UI.Init(playerScript);
+            playerScript.Init(LeftOrRight);
             attackRadius = playerScript.data.atkRad;
             AttackEvent.AddListener(() => Instantiate(attackPrefab).Init(transform.position, attackRadius));
             AttackEvent.AddListener(() => Instantiate(_attackPrefab).Init(transform.position, attackRadius, LeftOrRight));
@@ -98,8 +98,11 @@ namespace Gameplay
                     playerScript.BeDamaged(1);
                     playerScript.Hurt.Invoke();
                 }
+
+                Collision.Invoke();
             }
         }
+
 
         IEnumerator LoseControl()
         {

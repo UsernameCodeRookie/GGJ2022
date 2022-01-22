@@ -12,8 +12,7 @@ public class PlayerCtrlL:MonoBehaviour{
     void Start(){
         dir=new Vector3(0,-1,0);
 		sc=gameObject.GetComponent<PlayerScript>();
-		sc.Init();
-		UI.Init(sc);
+		sc.Init(false);
     }
 	
     void Update(){

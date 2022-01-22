@@ -5,7 +5,8 @@ using UnityEngine.Events;
 
 namespace Gameplay
 {
-	public class PlayerScript : MonoBehaviour
+	[CreateAssetMenu]
+	public class PlayerScript : ScriptableObject
 	{
 		public PlayerDataSO data;
 
@@ -13,11 +14,21 @@ namespace Gameplay
 		public int hp;
 
 		public float spDecreaseAmount;
-
 		public UnityEvent Hurt;
+		private bool LeftOrRight;
 
-		public void Init()
+		public void Init(bool LeftOrRight)
 		{
+			this.LeftOrRight = LeftOrRight;
+            if (LeftOrRight)
+            {
+				GameManager.instance.playerScriptL = this;
+            }
+			else
+            {
+				GameManager.instance.playerScriptR = this;
+			}
+
 			speed = data.initSpeed;
 			rushSpeed = data.rushSpeed;
 			sp = data.maxSp;
@@ -25,7 +36,6 @@ namespace Gameplay
 			hp = data.maxHp;
 
 			spDecreaseAmount = data.SpDecreaseAmount;
-
 		}
 
 		public bool SpDrop()
@@ -61,8 +71,7 @@ namespace Gameplay
 			hp -= amount;
 			if (hp <= 0)
 			{
-				Debug.LogError("Die");
-				Destroy(gameObject);
+				GameManager.instance.GameOver.Invoke();
 			}
 		}
 	}

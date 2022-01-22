@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using GridSystem;
+using Gameplay;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,17 +19,27 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public Vector3 originOffset;
+    [HideInInspector]
+    public PlayerScript playerScriptL, playerScriptR;
 
     [Header("Fruits")]
     public List<Fruit> fruitsL, fruitsR;
 
     public UnityEvent GameStart;
+    public UnityEvent GameOver;
 
+    public GameOverType winner;
+
+    public enum GameOverType
+    {
+        LeftWin,RightWin,Draw
+    }
 
     private void Awake()
     {
         instance = this;
         GameStart.AddListener(() => GridInitial());
+        GameOver.AddListener(() => WhoWins());
     }
 
     private void Start()
@@ -52,6 +63,14 @@ public class GameManager : MonoBehaviour
             fruitsR.Clear();
             GameStart.Invoke();
         }
+
+        WhoWins();
+    }
+
+    private void WhoWins()
+    {
+        winner = playerScriptL.hp > playerScriptR.hp ? GameOverType.LeftWin :
+                 playerScriptL.hp < playerScriptR.hp ? GameOverType.RightWin : GameOverType.Draw;
     }
 
     #region GenerateFruit
@@ -89,6 +108,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    #region GridInitial
     private void GridInitial()
     {
         GameObject L = Instantiate(gridFactoryLeftPrefab, Vector3.zero, Quaternion.identity);
@@ -115,5 +135,5 @@ public class GameManager : MonoBehaviour
 
         originOffset = left.origin.position - right.origin.position;
     }
-    
+    #endregion
 }
