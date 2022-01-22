@@ -30,7 +30,7 @@ namespace GridSystem
         {
             left.SetEmptyGridObject(x, y);
             right.SetEmptyGridObject(x, y);
-            Destroy(gameObject);
+            GameObject.Destroy(gameObject);
         }
     }
 }

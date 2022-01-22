@@ -6,10 +6,11 @@ namespace GridSystem {
     public class GridFactory : MonoBehaviour
     {
         [Header("Settings")]
-        public int width;
-        public int height;
-        public float cellSize;
+        private int width;
+        private int height;
+        private float cellSize;
         public Transform origin;
+        [HideInInspector]
         public GridFactory otherGridFactory;
         public bool LeftOrRight;
         [Header("Prefabs")]
@@ -22,23 +23,6 @@ namespace GridSystem {
         /// </summary>
         private bool[,] gridArray;
         public List<Vector2Int> emptyPosition;
-
-
-
-        private void Start()
-        {
-            gridArray = new bool[width, height];
-
-            SetGridObject(width / 2, height / 2, playerPrefab);
-
-            for (int x = 0; x < width; x++)
-            {
-                for (int y = 0; y < height; y++)
-                {
-                    emptyPosition.Add(new Vector2Int(x, y));
-                }
-            }
-        }
 
         private void Update()
         {
@@ -129,6 +113,28 @@ namespace GridSystem {
         public bool GetGridObject(int x, int y)
         {
             return gridArray[x, y];
+        }
+
+        public void SetValue(int width,int height, float cellSize)
+        {
+            this.width = width;
+            this.height = height;
+            this.cellSize = cellSize;
+        }
+
+        public void Initialize()
+        {
+            gridArray = new bool[width, height];
+
+            SetGridObject(width / 2, height / 2, playerPrefab);
+
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    emptyPosition.Add(new Vector2Int(x, y));
+                }
+            }
         }
     }
 }
