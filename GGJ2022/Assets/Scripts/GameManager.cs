@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         right.rootPosition.position =
-            new Vector3(5 - (left.rootPosition.position.x + 5) - width * cellSize, right.rootPosition.position.y, 0);
+            new Vector3(5 - (left.rootPosition.position.x + 5) - width * cellSize, left.rootPosition.position.y, 0);
 
         //果子位置冲突逻辑：果子生成时会提供一个占位给对面，当果子刷新时消除占位
         if(fruitsL.Count == 0)
