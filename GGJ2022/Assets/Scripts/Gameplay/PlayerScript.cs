@@ -5,7 +5,8 @@ using UnityEngine.Events;
 
 namespace Gameplay
 {
-	public class PlayerScript : MonoBehaviour
+	[CreateAssetMenu]
+	public class PlayerScript : ScriptableObject
 	{
 		public PlayerDataSO data;
 
@@ -71,7 +72,6 @@ namespace Gameplay
 			if (hp <= 0)
 			{
 				GameManager.instance.GameOver.Invoke();
-				Destroy(gameObject);
 			}
 		}
 	}

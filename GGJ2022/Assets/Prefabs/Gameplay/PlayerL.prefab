@@ -91,7 +91,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3813551134934191271}
-  - component: {fileID: 114602661538435163}
   - component: {fileID: 3732610912374359568}
   - component: {fileID: 4960811160077598533}
   - component: {fileID: 324053971585425783}
@@ -117,25 +116,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114602661538435163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3813551134934191269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94fde6f4c13a86c47af7fc26f15db483, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 6797bac66efc59245837e7dca1431cd1, type: 2}
-  speed: 0
-  rushSpeed: 0
-  sp: 0
-  mp: 0
-  hp: 0
-  spDecreaseAmount: 0
 --- !u!61 &3732610912374359568
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -195,8 +175,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a65f8e8471f4d1542bdeacd0e7127691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerScript: {fileID: 11400000, guid: 33f5c2a5cb61a98458615d788cf25615, type: 2}
   LeftOrRight: 1
   loseControl: 0
   isRushing: 0
   attackPrefab: {fileID: 4730501586275726648, guid: 43876c0d5af46df408b07f0829dd4f0f, type: 3}
   _attackPrefab: {fileID: 3751461404392962034, guid: 33ca234503fac364398e79bb7844d036, type: 3}
+  AttackEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  Collision:
+    m_PersistentCalls:
+      m_Calls: []

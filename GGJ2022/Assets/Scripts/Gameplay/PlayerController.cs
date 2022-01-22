@@ -6,14 +6,13 @@ using GridSystem;
 
 namespace Gameplay
 {
-    [RequireComponent(typeof(PlayerScript))]
     public class PlayerController : MonoBehaviour
     {
         private Vector3 direction;
         private float speed;
         private float attackRadius;
 
-        private PlayerScript playerScript;
+        public PlayerScript playerScript;
 
         private string Horizontal, Vertical;
         private KeyCode rushKey, attackKey;
@@ -33,7 +32,6 @@ namespace Gameplay
         {
             direction = new Vector3(0, -1f, 0);
 
-            playerScript = GetComponent<PlayerScript>();
             playerScript.Init(LeftOrRight);
             attackRadius = playerScript.data.atkRad;
             AttackEvent.AddListener(() => Instantiate(attackPrefab).Init(transform.position, attackRadius));
