@@ -23,5 +23,12 @@ namespace GridSystem
         {
             gridFactory.SetGridObject(x, y, gridFactory.wallPrefab);
         }
+
+        public void Disappear()
+        {
+            left.SetEmptyGridObject(x, y);
+            right.SetEmptyGridObject(x, y);
+            Destroy(gameObject);
+        }
     }
 }

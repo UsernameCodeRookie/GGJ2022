@@ -16,7 +16,12 @@ namespace GridSystem {
         public GameObject wallPrefab;
         public GameObject playerPrefab;
         public GameObject fruitPrefab;
+
+        /// <summary>
+        /// ´ýÐÞ¸Ä
+        /// </summary>
         private bool[,] gridArray;
+        public List<Vector2Int> emptyPosition;
 
 
 
@@ -24,11 +29,15 @@ namespace GridSystem {
         {
             gridArray = new bool[width, height];
 
-            SetGridObject(0, 0, wallPrefab);
-
             SetGridObject(width / 2, height / 2, playerPrefab);
 
-            //SetGridObject(0, 0, wallPrefab);
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    emptyPosition.Add(new Vector2Int(x, y));
+                }
+            }
         }
 
         private void Update()
@@ -51,23 +60,70 @@ namespace GridSystem {
             return new Vector3(x, y) * cellSize + origin.position;
         }
 
-        public void SetGridObject(int x, int y, GameObject prefab, bool cover = false)
+        #region SetGridObject
+
+        public void SetGridObject(int x, int y, GameObject prefab)
         {
             if (gridArray[x, y] == false)
             {
                 GameObject o = Instantiate(prefab, GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * 0.5f, Quaternion.identity, origin);
                 o.transform.localScale = Vector3.one * cellSize;
-                GridObject gridObject = o.GetComponent<GridObject>();
-                gridObject.x = x;
-                gridObject.y = y;
-                gridObject.LeftOrRight = LeftOrRight;
 
-                gridArray[x, y] = cover;
+                GridObject gridObject = o.GetComponent<GridObject>();
+                if (gridObject != null)
+                {
+                    gridObject.x = x;
+                    gridObject.y = y;
+                    gridObject.LeftOrRight = LeftOrRight;
+                    gridArray[x, y] = true;
+                }
             }
             else
             {
                 Debug.LogError("There have been a gridObject.");
             }
+        }
+
+        public void SetGridObject<T>(int index, GameObject prefab, out T gridObject) where T:GridObject
+        {
+            var vector2Int = emptyPosition[index];
+            int x = vector2Int.x;
+            int y = vector2Int.y;
+            if (gridArray[x, y] == false)
+            {
+                emptyPosition.RemoveAt(index);
+                gridArray[x, y] = true;
+
+                GameObject o = Instantiate(prefab, GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * 0.5f, Quaternion.identity, origin);
+                o.transform.localScale = Vector3.one * cellSize;
+
+                gridObject = o.GetComponent<T>();
+                if (gridObject != null)
+                {
+                    gridObject.x = x;
+                    gridObject.y = y;
+                    gridObject.LeftOrRight = LeftOrRight;
+                }
+            }
+            else
+            {
+                gridObject = null;
+                Debug.LogError("There have been a gridObject.");
+            }
+        }
+
+        #endregion
+
+        public void SetEmptyGridObject(int x,int y)
+        {
+            emptyPosition.Add(new Vector2Int(x, y));
+            gridArray[x, y] = false;
+        }
+
+        public void RemoveEmptyGridObject(int x,int y)
+        {
+            emptyPosition.Remove(new Vector2Int(x, y));
+            gridArray[x, y] = true;
         }
 
         public bool GetGridObject(int x, int y)

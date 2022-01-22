@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     public int width;
     public int height;
     public float cellSize;
+    public FruitGenerate fruitGenerateL, fruitGenerateR;
+
+    public List<Fruit> fruitsL, fruitsR;
 
 
     private void Awake()
@@ -25,24 +28,44 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            if(!RandomGenerateFruit())
-                RandomGenerateFruit();
-        }
+        //果子位置冲突逻辑：果子生成时会提供一个占位给对面，当果子刷新时消除占位
+        GeneratFruit(left, fruitGenerateL, fruitsL);
+        GeneratFruit(right, fruitGenerateR, fruitsR);
     }
 
-    public bool RandomGenerateFruit()
+    #region GenerateFruit
+    public bool RandomGenerateFruit(GridFactory gridFactory,out Fruit gridObject)
     {
-        int positionL = (int)(Random.value * width * height);
-        int positionR = (int)(Random.value * width * height);
-        Debug.Log(positionL);
-        Debug.Log(positionR);
-        if (positionL == positionR) return false;
-        if (left.GetGridObject(positionL % width, positionL / width) | right.GetGridObject(positionR % width, positionR / width)) return false;
+        gridObject = null;
+        int index = (int)(Random.value * gridFactory.emptyPosition.Count);
+        var position = gridFactory.emptyPosition[index];
+        gridFactory.SetGridObject(index, gridFactory.fruitPrefab, out gridObject);
 
-        left.SetGridObject(positionL % width, positionL / width, left.fruitPrefab);
-        right.SetGridObject(positionR % width, positionR / width, right.fruitPrefab);
+        gridFactory.otherGridFactory.RemoveEmptyGridObject(position.x, position.y);
         return true;
     }
+
+    public void GeneratFruit(GridFactory gridFactory, FruitGenerate fruitGenerate, List<Fruit> fruits)
+    {
+        if (fruitGenerate.UpdateTimer() | fruits.Count == 0)
+        {
+            fruitGenerate.generateTimer = 0;
+            for (int i = fruits.Count - 1; i >= 0; i--)
+            {
+                Fruit fruit = fruits[i];
+                fruits.RemoveAt(i);
+                fruit.Disappear();
+            }
+
+            for (int i = 0; i < fruitGenerate.generateAmount; i++)
+            {
+                Fruit fruit;
+                RandomGenerateFruit(gridFactory, out fruit);
+                fruits.Add(fruit);
+            }
+        }
+    }
+    #endregion
+
+    
 }
