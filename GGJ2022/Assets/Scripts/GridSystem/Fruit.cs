@@ -34,7 +34,8 @@ namespace GridSystem
         {
             left.SetEmptyGridObject(x, y);
             right.SetEmptyGridObject(x, y);
-            GameObject.Destroy(gameObject);
+            if(gameObject != null)
+                GameObject.Destroy(gameObject);
         }
     }
 }

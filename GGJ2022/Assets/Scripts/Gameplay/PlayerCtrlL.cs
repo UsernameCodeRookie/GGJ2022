@@ -16,7 +16,7 @@ public class PlayerCtrlL:MonoBehaviour{
     void Update(){
 		Vector3 op=new Vector3(Input.GetAxis("Horizontal L"),Input.GetAxis("Vertical L"),0);
 		if(op!=Vector3.zero)dir=op.normalized;
-		this.transform.Translate(dir*sc.spd*Time.deltaTime);
+		this.transform.Translate(dir*sc.speed*Time.deltaTime);
 		sc.Upd();
     }
 }

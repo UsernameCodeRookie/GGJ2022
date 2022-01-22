@@ -9,8 +9,7 @@ namespace GridSystem
     {
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            var p = collision.gameObject.GetComponent<PlayerScript>();
-            p.Die();
+
         }
     }
 }
