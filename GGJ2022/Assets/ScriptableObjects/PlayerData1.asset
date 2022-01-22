@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initSpeed: 2
   rushSpeed: 3
-  atkRad: 1
+  atkRad: 0.77
   maxSp: 10
   maxMp: 6
   maxHp: 3

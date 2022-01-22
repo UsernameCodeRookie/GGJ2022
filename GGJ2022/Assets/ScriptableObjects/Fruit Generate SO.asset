@@ -15,6 +15,6 @@ MonoBehaviour:
   DeveloperDescription: 
   generateFrequency: 0.3
   generateAmount: 3
-  frequencyVelocity: 0.2
-  frequencyAddAmount: 0.2
-  amountVelocity: 0.2
+  frequencyVelocity: 0.1
+  frequencyAddAmount: 0.1
+  amountVelocity: 0.1

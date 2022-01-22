@@ -26,6 +26,10 @@ namespace Gameplay
 
         public UnityEvent AttackEvent;
 
+        public Camera mCamera;
+        public CameraController cameraController;
+        //public UnityAction cameraShakeAction;
+
         private void Start()
         {
             direction = new Vector3(0, -1f, 0);
@@ -50,6 +54,11 @@ namespace Gameplay
                 rushKey = KeyCode.Alpha1;
                 attackKey = KeyCode.Alpha2;
             }
+
+            mCamera = Camera.main;
+            cameraController = mCamera.GetComponentInParent<CameraController>();
+            //cameraShakeAction += cameraController.CameraShake;
+            AttackEvent.AddListener(cameraController.CameraShake);
         }
 
         private void Update()

@@ -2,12 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Gameplay;
+using MoreMountains.Feedbacks;
 
 namespace GridSystem
 {
     public class Wall : GridObject
     {
         public bool isBoundary;
+        public MMFeedbacks mMFeedbacks;
+
+        void Awake()
+        {
+            if (!isBoundary)
+            {
+                mMFeedbacks = gameObject.GetComponent<MMFeedbacks>();
+                mMFeedbacks.PlayFeedbacks();
+            }
+        }
 
         public void Transfer()
         {

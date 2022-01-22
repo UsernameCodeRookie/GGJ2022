@@ -78,9 +78,9 @@ MonoBehaviour:
   origin: {fileID: 375506966361690820}
   otherGridFactory: {fileID: 0}
   LeftOrRight: 1
-  wallPrefab: {fileID: 5005168806409928148, guid: e4abb019e8023c843a07a56ddb37ced4, type: 3}
-  playerPrefab: {fileID: 3813551134934191269, guid: 1e11458e105934a418a0502e7eb2ed35, type: 3}
-  fruitPrefab: {fileID: 2600305789697248784, guid: a0a469083d4e3564f889fd8e721521dc, type: 3}
+  wallPrefab: {fileID: 5005168806409928148, guid: 6159848feb041374fad7577ee53f69b9, type: 3}
+  playerPrefab: {fileID: 3813551134934191269, guid: 515cce85fae2d4b4eb8ef33d3dd4f7e1, type: 3}
+  fruitPrefab: {fileID: 2600305789697248784, guid: 440db4f441bca644e8925805e4502a44, type: 3}
   emptyPosition: []
 --- !u!114 &3649461024085395115
 MonoBehaviour:
