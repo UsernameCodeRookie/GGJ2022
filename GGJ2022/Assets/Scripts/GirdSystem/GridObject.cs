@@ -10,11 +10,13 @@ namespace GridSystem
         public int x, y;
         public bool LeftOrRight;
         protected GridFactory left, right;
+        protected GameManager gameManager;
 
         protected void Start()
         {
-            left = GameObject.FindGameObjectWithTag("LeftGrid").GetComponent<GridFactory>();
-            right = GameObject.FindGameObjectWithTag("RightGrid").GetComponent<GridFactory>();
+            gameManager = GameManager.instance;
+            left = gameManager.left;
+            right = gameManager.right;
         }
     }
 }

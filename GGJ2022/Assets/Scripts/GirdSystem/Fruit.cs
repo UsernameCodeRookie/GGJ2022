@@ -16,6 +16,7 @@ namespace GridSystem
             {
                 SetWallInGrid(left);
             }
+            Destroy(gameObject);
         }
 
         private void SetWallInGrid(GridFactory gridFactory)

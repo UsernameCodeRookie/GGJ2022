@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Gameplay;
 
 namespace GridSystem
 {
@@ -8,7 +9,8 @@ namespace GridSystem
     {
         private void OnCollisionEnter2D(Collision2D collision)
         {
-
+            var p = collision.gameObject.GetComponent<PlayerScript>();
+            p.Die();
         }
     }
 }
