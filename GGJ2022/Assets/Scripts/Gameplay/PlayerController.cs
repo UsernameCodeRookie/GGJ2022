@@ -70,7 +70,11 @@ namespace Gameplay
 
             if (Input.GetKeyDown(attackKey))
             {
-                AttackEvent.Invoke();
+                if(playerScript.availableAttackCount >=1)
+                {
+                    AttackEvent.Invoke();
+                    playerScript.DecreaseAvailableAttackCount();
+                }
             }
         }
 
