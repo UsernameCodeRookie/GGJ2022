@@ -10,21 +10,34 @@ namespace GridSystem
     {
         public bool isBoundary;
         private MMFeedbacks mMFeedbacks;
+        private MMFeedbacks[] mMFeedbackList;
 
         void Awake()
         {
-            if (!isBoundary)
-            {
-                StartCoroutine("FeedBack");
-            }
+            StartCoroutine("AppearFeedBack");
         }
 
-        IEnumerator FeedBack()
+        IEnumerator AppearFeedBack()
         {
             yield return 0;
-            mMFeedbacks = gameObject.GetComponentInChildren<MMFeedbacks>();
-            mMFeedbacks.PlayFeedbacks();
+            //mMFeedbacks = gameObject.GetComponentInChildren<MMFeedbacks>();
+            mMFeedbackList = gameObject.GetComponentsInChildren<MMFeedbacks>();
+            if(!isBoundary)
+                AppearanceFeedback();
             yield return 0;
+        }
+
+        private void AppearanceFeedback()
+        {
+            mMFeedbackList[0].PlayFeedbacks();
+        }
+
+        public void ShakeFeedback()
+        {
+            if (isBoundary)
+                mMFeedbackList[0].PlayFeedbacks();
+            else
+                mMFeedbackList[1].PlayFeedbacks();
         }
 
         public void Transfer()

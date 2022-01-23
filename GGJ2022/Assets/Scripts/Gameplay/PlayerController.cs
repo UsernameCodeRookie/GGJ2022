@@ -93,6 +93,7 @@ namespace Gameplay
         {
             if (collision.gameObject.GetComponent<Wall>())
             {
+                collision.gameObject.GetComponent<Wall>().ShakeFeedback();
                 direction = Vector3.Reflect(direction, collision.contacts[0].normal);
                 StartCoroutine("LoseControl");
                 if (isRushing)
