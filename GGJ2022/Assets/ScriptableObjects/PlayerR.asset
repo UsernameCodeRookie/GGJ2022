@@ -9,18 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 471751fcca002e9499b6017a04c1350a, type: 3}
-  m_Name: PlayerData
+  m_Script: {fileID: 11500000, guid: 94fde6f4c13a86c47af7fc26f15db483, type: 3}
+  m_Name: PlayerR
   m_EditorClassIdentifier: 
-  initSpeed: 1
+  data: {fileID: 11400000, guid: 6797bac66efc59245837e7dca1431cd1, type: 2}
+  speed: 1
   rushSpeed: 2
-  atkRad: 0.7
-  maxSp: 5
-  maxMp: 5
-  maxHp: 10
-  mpRate: 5
-  atkCnt: 2
-  spRecover: 1.5
-  mpRecover: 2
-  SpDecreaseAmount: 1
-  LoseControlTime: 1
+  sp: 5
+  mp: 5
+  hp: 6
+  spDecreaseAmount: 1
+  Hurt:
+    m_PersistentCalls:
+      m_Calls: []

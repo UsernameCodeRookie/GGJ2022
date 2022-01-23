@@ -5,42 +5,48 @@ using UnityEngine.Events;
 
 namespace Gameplay
 {
-	public class PlayerScript : MonoBehaviour
+	[CreateAssetMenu]
+	public class PlayerScript : ScriptableObject
 	{
 		public PlayerDataSO data;
 
-		public float speed, rushSpeed, sp, mp;
+        [Header("UI Display Variables")]
+		public float sp, mp;
 		public int hp;
+        public int availableAttackCount;
 
+
+        public float speed;
+        public float rushSpeed;
 		public float spDecreaseAmount;
-
 		public UnityEvent Hurt;
+		private bool LeftOrRight;
 
-		public void Init()
+		public void Init(bool LeftOrRight)
 		{
+			this.LeftOrRight = LeftOrRight;
+            if (LeftOrRight)
+            {
+				GameManager.instance.playerScriptL = this;
+            }
+			else
+            {
+				GameManager.instance.playerScriptR = this;
+			}
+
 			speed = data.initSpeed;
 			rushSpeed = data.rushSpeed;
 			sp = data.maxSp;
-			mp = data.maxMp;
+			mp = 0;
 			hp = data.maxHp;
+			availableAttackCount = 1;
 
 			spDecreaseAmount = data.SpDecreaseAmount;
-
 		}
 
-		public bool SpDrop()
+		public void SpDrop()
 		{
-			sp -= spDecreaseAmount * Time.deltaTime;
-
-			if (sp > 0)
-			{
-				return true;
-			}
-			else
-			{
-				sp = 0;
-				return false;
-			}
+			sp = Mathf.Max(0f, sp - spDecreaseAmount * Time.deltaTime);
 		}
 
 		public void Upd()
@@ -51,18 +57,29 @@ namespace Gameplay
 
 		public void GetFruit()
 		{
-			mp += 1f;
-			if (mp > data.maxMp) mp = data.maxMp;
-			sp = data.maxSp;
+			mp += data.mpRecover;
+            if (mp > data.maxMp)
+            {
+                mp = 0;
+				availableAttackCount = Mathf.Min(data.atkCnt, availableAttackCount + 1);
+            }
+			sp += data.spRecover;
+            if (sp > data.maxSp)
+                sp = data.maxSp;
 		}
+
+        public void DecreaseAvailableAttackCount()
+        {
+            if(availableAttackCount >= 1)
+                availableAttackCount--;
+        }
 
 		public void BeDamaged(int amount)
 		{
 			hp -= amount;
 			if (hp <= 0)
 			{
-				Debug.LogError("Die");
-				Destroy(gameObject);
+				GameManager.instance.GameOver.Invoke();
 			}
 		}
 	}

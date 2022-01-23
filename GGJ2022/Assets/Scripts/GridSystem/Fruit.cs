@@ -26,8 +26,8 @@ namespace GridSystem
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            var p = collision.gameObject.GetComponent<PlayerScript>();
-            p.GetFruit();
+            var p = collision.gameObject.GetComponent<PlayerController>();
+            p.playerScript.GetFruit();
 			
             if (LeftOrRight)
             {

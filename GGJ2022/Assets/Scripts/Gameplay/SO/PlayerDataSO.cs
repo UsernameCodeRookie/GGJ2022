@@ -16,6 +16,11 @@ namespace Gameplay
         public int maxHp;
         public float mpRate;
         public int atkCnt;
+
+        [Header("Recover Amount Config")]
+        public float spRecover;
+        public float mpRecover;
+
         [Header("Second Level Data")]
         public float SpDecreaseAmount;
         public float LoseControlTime;
