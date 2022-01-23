@@ -36,9 +36,9 @@ namespace Gameplay
 
             playerScript.Init(LeftOrRight);
             attackRadius = playerScript.data.atkRad;
+            AttackEvent.AddListener(() => playerScript.DecreaseAvailableAttackCount());
             AttackEvent.AddListener(() => Instantiate(attackPrefab).Init(transform.position, attackRadius));
             AttackEvent.AddListener(() => Instantiate(_attackPrefab).Init(transform.position, attackRadius, LeftOrRight));
-
             if (LeftOrRight)
             {
                 Horizontal = "Horizontal L";
@@ -57,7 +57,6 @@ namespace Gameplay
             mCamera = Camera.main;
             cameraController = mCamera.GetComponentInParent<CameraController>();
             //cameraShakeAction += cameraController.CameraShake;
-            AttackEvent.AddListener(() => playerScript.DecreaseAvailableAttackCount());
             AttackEvent.AddListener(() => cameraController.CameraShake());
         }
 
@@ -80,10 +79,12 @@ namespace Gameplay
                 speed = playerScript.speed;
             }
 
-            if (Input.GetKeyDown(attackKey))
+            if (Input.GetKeyDown(attackKey) && playerScript.availableAttackCount > 0)
             {
                 AttackEvent.Invoke();
             }
+
+            playerScript.Upd();
         }
 
         private void FixedUpdate()

@@ -52,7 +52,11 @@ namespace Gameplay
 		public void Upd()
 		{
 			mp += data.mpRate * Time.deltaTime;
-			if (mp > data.maxMp) mp = data.maxMp;
+			if (mp > data.maxMp)
+			{
+				mp -= data.maxMp;
+				availableAttackCount = Mathf.Min(data.atkCnt, availableAttackCount + 1);
+			}
 		}
 
 		public void GetFruit()
@@ -60,7 +64,7 @@ namespace Gameplay
 			mp += data.mpRecover;
             if (mp > data.maxMp)
             {
-                mp = 0;
+                mp -= data.maxMp;
 				availableAttackCount = Mathf.Min(data.atkCnt, availableAttackCount + 1);
             }
 			sp += data.spRecover;
