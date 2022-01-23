@@ -10,7 +10,7 @@ public class PlayerCtrlR:MonoBehaviour{
     void Start(){
         dir=new Vector3(0,1,0);
 		sc=gameObject.GetComponent<PlayerScript>();
-		sc.Init(false);
+		sc.Init();
     }
 	
     void Update(){

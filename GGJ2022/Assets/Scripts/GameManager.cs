@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using GridSystem;
-using Gameplay;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,98 +18,40 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public Vector3 originOffset;
-    [HideInInspector]
-    public PlayerScript playerScriptL, playerScriptR;
 
     [Header("Fruits")]
     public List<Fruit> fruitsL, fruitsR;
 
-    [Header("GameSetting")]
     public UnityEvent GameStart;
-    public UnityEvent GameOver;
 
-    public GameOverType winner;
-
-    public AnimationCurve curve;
-    public float totalTime;
-    [HideInInspector]
-    public float timer;
-
-    public bool isPlaying = false;
-
-
-    public enum GameOverType
-    {
-        LeftWin,RightWin,Draw
-    }
 
     private void Awake()
     {
         instance = this;
-        GameStart.AddListener(() =>
-        {
-            GridInitial();
-            timer = 0;
-            isPlaying = true;
-            //GeneratFruit(left, fruitGenerateL, fruitsL);
-            //GeneratFruit(right, fruitGenerateR, fruitsR);
-        });
+        GameStart.AddListener(() => GridInitial());
+    }
 
-        GameOver.AddListener(() =>
-        {
-            WhoWins();
-            DestroyGrid();
-            fruitsL.Clear();
-            fruitsR.Clear();
-            isPlaying = false;
-        });
+    private void Start()
+    {
+        GameStart.Invoke();
     }
 
     private void Update()
     {
-        timer += Time.deltaTime;
+        //果子位置冲突逻辑：果子生成时会提供一个占位给对面，当果子刷新时消除占位
+        if(fruitsL.Count == 0)
+            GeneratFruit(left, fruitGenerateL, fruitsL);
+        if(fruitsR.Count == 0)
+            GeneratFruit(right, fruitGenerateR, fruitsR);
 
-        if (isPlaying)
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            right.rootPosition.position =
-                new Vector3(-left.rootPosition.position.x - width * cellSize, left.rootPosition.position.y, 0);
-
-            if (fruitsL.Count == 0)
-                GeneratFruit(left, fruitGenerateL, fruitsL);
-            if (fruitsR.Count == 0)
-                GeneratFruit(right, fruitGenerateR, fruitsR);
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                if (left != null) GameObject.Destroy(left.gameObject);
-                if (right != null) GameObject.Destroy(right.gameObject);
-                fruitsL.Clear();
-                fruitsR.Clear();
-                GameStart.Invoke();
-            }
-
-            WhoWins();
+            if (left != null) GameObject.Destroy(left.gameObject);
+            if (right != null) GameObject.Destroy(right.gameObject);
+            fruitsL.Clear();
+            fruitsR.Clear();
+            GameStart.Invoke();
         }
-    }
-
-    private void WhoWins()
-    {
-        if (playerScriptL != null && playerScriptR != null)
-        winner = playerScriptL.hp > playerScriptR.hp ? GameOverType.LeftWin :
-                 playerScriptL.hp < playerScriptR.hp ? GameOverType.RightWin : GameOverType.Draw;
-    }
-
-    public float SpeedMultiply()
-    {
-        return curve.Evaluate(timer/totalTime);
-    }
-
-    public void DestroyGrid()
-    {
-        if (left != null) GameObject.Destroy(left.gameObject);
-        if (right != null) GameObject.Destroy(right.gameObject);
-
-        
     }
 
     #region GenerateFruit
@@ -148,12 +89,10 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    #region GridInitial
     private void GridInitial()
     {
-        GameObject L = Instantiate(gridFactoryLeftPrefab, Vector3.zero, Quaternion.identity,gameObject.transform);
-        GameObject R = Instantiate(gridFactoryRightPrefab, Vector3.zero, Quaternion.identity,gameObject.transform);
-
+        GameObject L = Instantiate(gridFactoryLeftPrefab, Vector3.zero, Quaternion.identity);
+        GameObject R = Instantiate(gridFactoryRightPrefab, Vector3.zero, Quaternion.identity);
 
         left = L.GetComponent<GridFactory>();
         right = R.GetComponent<GridFactory>();
@@ -176,5 +115,5 @@ public class GameManager : MonoBehaviour
 
         originOffset = left.origin.position - right.origin.position;
     }
-    #endregion
+    
 }
