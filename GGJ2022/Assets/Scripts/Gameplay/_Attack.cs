@@ -77,10 +77,10 @@ namespace Gameplay
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            var o = collision.gameObject.GetComponent<PlayerScript>();
+            var o = collision.gameObject.GetComponent<PlayerController>();
             if (o != null)
             {
-                o.BeDamaged(1);
+                o.playerScript.BeDamaged(1);
             }
         }
 

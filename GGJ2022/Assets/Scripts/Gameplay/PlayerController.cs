@@ -57,7 +57,8 @@ namespace Gameplay
             mCamera = Camera.main;
             cameraController = mCamera.GetComponentInParent<CameraController>();
             //cameraShakeAction += cameraController.CameraShake;
-            AttackEvent.AddListener(cameraController.CameraShake);
+            AttackEvent.AddListener(() => playerScript.DecreaseAvailableAttackCount());
+            AttackEvent.AddListener(() => cameraController.CameraShake());
         }
 
         private void Update()
@@ -66,7 +67,10 @@ namespace Gameplay
             {
                 isRushing = true;
                 if (playerScript.sp > 0)
+                {
+                    playerScript.SpDrop();
                     speed = playerScript.rushSpeed;
+                }
                 else
                     speed = playerScript.speed;
             }
