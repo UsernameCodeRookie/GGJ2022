@@ -92,19 +92,22 @@ namespace Gameplay
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.GetComponent<Wall>())
+            var o = collision.gameObject.GetComponent<Wall>();
+            if (o != null)
             {
-                collision.gameObject.GetComponent<Wall>().ShakeFeedback();
+                o.ShakeFeedback();
                 direction = Vector3.Reflect(direction, collision.contacts[0].normal);
                 StartCoroutine("LoseControl");
                 if (isRushing)
                 {
-                    playerScript.BeDamaged(2);
+                    if(!o.isBoundary)
+                        playerScript.BeDamaged(2);
                     playerScript.Hurt.Invoke();
                 }
                 else
                 {
-                    playerScript.BeDamaged(1);
+                    if (!o.isBoundary)
+                        playerScript.BeDamaged(1);
                     playerScript.Hurt.Invoke();
                 }
             }
