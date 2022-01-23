@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Gameplay;
+using UI;
 
 public class UIManager:MonoBehaviour{
 	public GameObject startUI,endUI,playUI,pauseUI,gameMgr;
+	public GameObject helpUI;
 	private GameManager gameManager;
 	
 	private int state;//0:start_1:end_2:play_3:pause
@@ -63,6 +65,12 @@ public class UIManager:MonoBehaviour{
 		gameMgr.SetActive(true);
 	}
 	
+	public void HelpEnter()
+    {
+		helpUI.SetActive(true);
+		helpUI.GetComponent<HelpUI>().frame = 0;
+    }
+
 	public void GameExit(){
 		Application.Quit();
 	}
