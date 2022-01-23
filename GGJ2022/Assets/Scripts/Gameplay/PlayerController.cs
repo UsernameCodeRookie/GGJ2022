@@ -92,7 +92,7 @@ namespace Gameplay
             Vector3 moveInput = new Vector3(Input.GetAxis(Horizontal), Input.GetAxis(Vertical), 0);
             if (moveInput != Vector3.zero & !loseControl)
                 direction = moveInput.normalized;
-            transform.Translate(direction * speed * Time.deltaTime);
+            transform.Translate(direction * speed * Time.deltaTime * GameManager.instance.SpeedMultiply());
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
