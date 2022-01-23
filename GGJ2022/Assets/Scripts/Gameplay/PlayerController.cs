@@ -120,10 +120,14 @@ namespace Gameplay
 
         IEnumerator LoseControl()
         {
+            var render = GetComponentInChildren<SpriteRenderer>();
             float loseControlProgress;
             loseControl = true;
+            render.color = new Color(render.color.r, render.color.g, render.color.b, 0.3f);
             for (loseControlProgress = 0; loseControlProgress < playerScript.data.LoseControlTime; loseControlProgress += Time.deltaTime)
             {
+                var ratio = loseControlProgress / playerScript.data.LoseControlTime;
+                render.color = new Color(render.color.r, render.color.g, render.color.b, 0.3f + 0.7f * ratio);
                 yield return 0;
             }
             loseControl = false;
