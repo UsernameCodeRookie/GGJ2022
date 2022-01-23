@@ -15,9 +15,9 @@ MonoBehaviour:
   initSpeed: 1
   rushSpeed: 2
   atkRad: 0.7
-  maxSp: 5
-  maxMp: 5
-  maxHp: 10
+  maxSp: 10
+  maxMp: 6
+  maxHp: 3
   mpRate: 5
   atkCnt: 2
   spRecover: 1.5

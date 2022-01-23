@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94fde6f4c13a86c47af7fc26f15db483, type: 3}
   m_Name: PlayerL
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 6797bac66efc59245837e7dca1431cd1, type: 2}
-  speed: 1
-  rushSpeed: 2
-  sp: 5
-  mp: 5
-  hp: 8
-  spDecreaseAmount: 1
+  data: {fileID: 11400000, guid: 51c8378a44fd338439a1367b5a39f835, type: 2}
+  sp: 10
+  mp: 0
+  hp: 0
+  availableAttackCount: 1
+  speed: 2
+  rushSpeed: 3
+  spDecreaseAmount: 0
   Hurt:
     m_PersistentCalls:
       m_Calls: []

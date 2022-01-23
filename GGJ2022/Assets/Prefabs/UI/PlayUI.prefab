@@ -491,16 +491,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: Assets\GameAssets\Textures\UI\Black
   sc: {fileID: 11400000, guid: 75c6a2e349cfd0f448830a8d41f39804, type: 2}
-  skillImage:
-  - {fileID: 2800000, guid: e00461d413c5c2642bc6af4a7fd3c815, type: 3}
-  - {fileID: 2800000, guid: 8d58c9cea71703142bd863a12fc6d0b1, type: 3}
-  - {fileID: 2800000, guid: 654be8e49905f584c91dbf493d697a39, type: 3}
-  - {fileID: 2800000, guid: 9a6d0cf181f0d41409ef656a33a85f0b, type: 3}
-  hpImage:
-  - {fileID: 2800000, guid: e00461d413c5c2642bc6af4a7fd3c815, type: 3}
-  - {fileID: 2800000, guid: 9948e2a127cc04d4f922db9c4b91d475, type: 3}
-  - {fileID: 2800000, guid: 4e42e6dcd7af8bf468230dcfd01bb784, type: 3}
-  - {fileID: 2800000, guid: 331754acee390f6459e69b10ab67f9b9, type: 3}
 --- !u!1 &8383720525020571240
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,6 +984,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sec: 29
   min: 1
+  isTiming: 0
 --- !u!1 &8383720526158376078
 GameObject:
   m_ObjectHideFlags: 0
@@ -1050,16 +1041,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: Assets\GameAssets\Textures\UI\White
   sc: {fileID: 11400000, guid: 33f5c2a5cb61a98458615d788cf25615, type: 2}
-  skillImage:
-  - {fileID: 2800000, guid: e00461d413c5c2642bc6af4a7fd3c815, type: 3}
-  - {fileID: 2800000, guid: bc96198d2ac65a347a8a8ac76b80bf40, type: 3}
-  - {fileID: 2800000, guid: 47529e79c03525c43a0aa5524d17cc8f, type: 3}
-  - {fileID: 2800000, guid: b867f3e3b3797f447960f46999327ca0, type: 3}
-  hpImage:
-  - {fileID: 2800000, guid: e00461d413c5c2642bc6af4a7fd3c815, type: 3}
-  - {fileID: 2800000, guid: 002713531346ce741a7d5ebce3c856be, type: 3}
-  - {fileID: 2800000, guid: 010d8fefc3fab0646851855ea5ed4192, type: 3}
-  - {fileID: 2800000, guid: e4a3c2c12dd643249984705088d5c978, type: 3}
 --- !u!1 &8383720526372915352
 GameObject:
   m_ObjectHideFlags: 0

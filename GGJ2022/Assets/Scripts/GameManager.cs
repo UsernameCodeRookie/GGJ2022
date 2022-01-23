@@ -158,6 +158,9 @@ public class GameManager : MonoBehaviour
         left = L.GetComponent<GridFactory>();
         right = R.GetComponent<GridFactory>();
 
+        right.rootPosition.position =
+                new Vector3(-left.rootPosition.position.x - width * cellSize, left.rootPosition.position.y, 0);
+
         left.SetValue(width, height, cellSize);
         left.Initialize();
         left.otherGridFactory = right;
