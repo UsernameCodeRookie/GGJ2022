@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GridSystem;
+using MoreMountains.Feedbacks;
 
 namespace Gameplay
 {
@@ -16,6 +17,20 @@ namespace Gameplay
         private Collider2D playerCollider;
 
         public AttackSO so;
+        private MMFeedbacks mMFeedbacks;
+
+        void Awake()
+        {
+            StartCoroutine("FeedBack");
+        }
+
+        IEnumerator FeedBack()
+        {
+            yield return 0;
+            mMFeedbacks = gameObject.GetComponentInChildren<MMFeedbacks>();
+            mMFeedbacks.PlayFeedbacks();
+            yield return 0;
+        }
 
         public void Init(Vector3 position, float attackRadius)
         {

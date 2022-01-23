@@ -5209,7 +5209,7 @@ MonoBehaviour:
   AnimateScaleTarget: {fileID: 5892900407143711111}
   AnimateScaleDuration: 0.5
   RemapCurveZero: 0.55
-  RemapCurveOne: 1
+  RemapCurveOne: 1.2
   Offset: 0
   AnimateX: 1
   AnimateScaleX:
@@ -5226,7 +5226,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 0.17500001
-      value: 0.040290833
+      value: 0.1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
