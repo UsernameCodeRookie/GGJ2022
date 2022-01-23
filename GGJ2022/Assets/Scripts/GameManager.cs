@@ -36,6 +36,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public float timer;
 
+    public bool isPlaying = false;
+
 
     public enum GameOverType
     {
@@ -45,43 +47,55 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        GameStart.AddListener(() => GridInitial());
-        GameStart.AddListener(() => timer = 0);
-        GameOver.AddListener(() => WhoWins());
-    }
+        GameStart.AddListener(() =>
+        {
+            GridInitial();
+            timer = 0;
+            isPlaying = true;
+            //GeneratFruit(left, fruitGenerateL, fruitsL);
+            //GeneratFruit(right, fruitGenerateR, fruitsR);
+        });
 
-    private void Start()
-    {
-        GameStart.Invoke();
+        GameOver.AddListener(() =>
+        {
+            WhoWins();
+            DestroyGrid();
+            fruitsL.Clear();
+            fruitsR.Clear();
+            isPlaying = false;
+        });
     }
 
     private void Update()
     {
         timer += Time.deltaTime;
 
-        right.rootPosition.position =
-            new Vector3(5 - (left.rootPosition.position.x + 5) - width * cellSize, left.rootPosition.position.y, 0);
-
-        //果子位置冲突逻辑：果子生成时会提供一个占位给对面，当果子刷新时消除占位
-        if(fruitsL.Count == 0)
-            GeneratFruit(left, fruitGenerateL, fruitsL);
-        if(fruitsR.Count == 0)
-            GeneratFruit(right, fruitGenerateR, fruitsR);
-
-        if (Input.GetKeyDown(KeyCode.R))
+        if (isPlaying)
         {
-            if (left != null) GameObject.Destroy(left.gameObject);
-            if (right != null) GameObject.Destroy(right.gameObject);
-            fruitsL.Clear();
-            fruitsR.Clear();
-            GameStart.Invoke();
-        }
+            right.rootPosition.position =
+                new Vector3(-left.rootPosition.position.x - width * cellSize, left.rootPosition.position.y, 0);
 
-        WhoWins();
+            if (fruitsL.Count == 0)
+                GeneratFruit(left, fruitGenerateL, fruitsL);
+            if (fruitsR.Count == 0)
+                GeneratFruit(right, fruitGenerateR, fruitsR);
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                if (left != null) GameObject.Destroy(left.gameObject);
+                if (right != null) GameObject.Destroy(right.gameObject);
+                fruitsL.Clear();
+                fruitsR.Clear();
+                GameStart.Invoke();
+            }
+
+            WhoWins();
+        }
     }
 
     private void WhoWins()
     {
+        if (playerScriptL != null && playerScriptR != null)
         winner = playerScriptL.hp > playerScriptR.hp ? GameOverType.LeftWin :
                  playerScriptL.hp < playerScriptR.hp ? GameOverType.RightWin : GameOverType.Draw;
     }
@@ -89,6 +103,14 @@ public class GameManager : MonoBehaviour
     public float SpeedMultiply()
     {
         return curve.Evaluate(timer/totalTime);
+    }
+
+    public void DestroyGrid()
+    {
+        if (left != null) GameObject.Destroy(left.gameObject);
+        if (right != null) GameObject.Destroy(right.gameObject);
+
+        
     }
 
     #region GenerateFruit

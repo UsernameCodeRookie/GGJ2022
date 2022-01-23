@@ -91,10 +91,12 @@ namespace Gameplay
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.GetComponent<Wall>())
+            var o = collision.gameObject.GetComponent<Wall>();
+            if (o != null)
             {
                 direction = Vector3.Reflect(direction, collision.contacts[0].normal);
                 StartCoroutine("LoseControl");
+
                 if (isRushing)
                 {
                     playerScript.BeDamaged(2);

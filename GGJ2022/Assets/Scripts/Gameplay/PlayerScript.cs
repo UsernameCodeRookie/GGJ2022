@@ -13,7 +13,7 @@ namespace Gameplay
         [Header("UI Display Variables")]
 		public float sp, mp;
 		public int hp;
-        public int availableAttackCount = 1;
+        public int availableAttackCount;
 
 
         public float speed;

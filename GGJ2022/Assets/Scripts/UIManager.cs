@@ -5,7 +5,7 @@ using Gameplay;
 
 public class UIManager:MonoBehaviour{
 	public GameObject startUI,endUI,playUI,pauseUI,gameMgr;
-	
+	private GameManager gameManager;
 	
 	private int state;//0:start_1:end_2:play_3:pause
 	
@@ -15,8 +15,11 @@ public class UIManager:MonoBehaviour{
 		endUI.SetActive(false);
 		playUI.SetActive(false);
 		pauseUI.SetActive(false);
-		gameMgr.SetActive(false);
-		gameMgr.GetComponent<GameManager>().GameOver.AddListener(GameEnd);
+//		gameMgr.SetActive(false);
+//		gameMgr.GetComponent<GameManager>().GameOver.AddListener(GameEnd);
+
+		gameManager = gameMgr.GetComponent<GameManager>();
+		gameManager.GameOver.AddListener(GameEnd);
 	}
 	
     void Update(){
@@ -24,22 +27,22 @@ public class UIManager:MonoBehaviour{
 	}
 	
 	public void GameReset(){
+		gameManager.GameStart.Invoke();
 		state=2;
 		startUI.SetActive(false);
 		endUI.SetActive(false);
 		playUI.SetActive(true);
 		pauseUI.SetActive(false);
-		gameMgr.SetActive(true);
-//		gameMgr.GetComponent<GameManager>().Reset();
+//		gameMgr.SetActive(true);
 	}
 	
 	public void GameEnd(){
 		state=1;
 //		startUI.SetActive(false);
 		endUI.SetActive(true);
-//		playUI.SetActive(false);
+		playUI.SetActive(false);
 //		pauseUI.SetActive(false);
-		gameMgr.SetActive(false);
+//		gameMgr.SetActive(false);
 	}
 	
 	public void GamePause(){
