@@ -9,7 +9,6 @@ namespace GridSystem {
         private int width;
         private int height;
         private float cellSize;
-        public Transform rootPosition;
         public Transform origin;
         [HideInInspector]
         public GridFactory otherGridFactory;
@@ -43,7 +42,7 @@ namespace GridSystem {
 
         private Vector3 GetWorldPosition(int x, int y)
         {
-            return new Vector3(x, y) * cellSize + rootPosition.position;
+            return new Vector3(x, y) * cellSize + origin.position;
         }
 
         #region SetGridObject

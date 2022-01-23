@@ -6,7 +6,6 @@ using MoreMountains.Feedbacks;
 
 namespace Gameplay
 {
-    [RequireComponent(typeof(Collider2D))]
     public class _Attack : MonoBehaviour
     {
 

@@ -10,7 +10,6 @@ namespace UI
         public int sec, min;
         float timer;
         Text text;
-        public bool isTiming;
 
 
         private void Start()
@@ -18,15 +17,11 @@ namespace UI
             text = GetComponentInChildren<Text>();
             GameManager gameManager = GameManager.instance;
             gameManager.GameStart.AddListener(Initialize);
-
-            gameManager.GameStart.AddListener(() => isTiming = true);
-            gameManager.GameOver.AddListener(() => isTiming = false);
         }
 
         private void Update()
         {
-            if(isTiming)
-                timer += Time.deltaTime;
+            timer += Time.deltaTime;
             while (timer > 1)
             {
                 timer -= 1;
@@ -52,8 +47,8 @@ namespace UI
 
         public void Initialize()
         {
-            min = (int)GameManager.instance.totalTime / 60;
-            sec = (int)GameManager.instance.totalTime % 60;
+            min = 3;
+            sec = 0;
         }
     }
 }
