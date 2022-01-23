@@ -177,7 +177,7 @@ public class GameManager : MonoBehaviour
         fruitGenerateL.UpdateTimerEvent.AddListener(() => GeneratFruit(left, fruitGenerateL, fruitsL));
         fruitGenerateR.UpdateTimerEvent.AddListener(() => GeneratFruit(right, fruitGenerateR, fruitsR));
 
-        originOffset = left.origin.position - right.origin.position;
+        originOffset = left.rootPosition.position - right.rootPosition.position;
     }
     #endregion
 }
