@@ -17,8 +17,9 @@ namespace UI
         {
             text = GetComponentInChildren<Text>();
             GameManager gameManager = GameManager.instance;
+            Initialize();
+            isTiming = true;
             gameManager.GameStart.AddListener(Initialize);
-
             gameManager.GameStart.AddListener(() => isTiming = true);
             gameManager.GameOver.AddListener(() => isTiming = false);
         }
@@ -42,7 +43,7 @@ namespace UI
                 GameOver();
             }
 
-            text.text = min.ToString() + ":" + sec.ToString();
+            text.text = min.ToString() + ":" + ((int)(sec / 10)).ToString() + ((int)(sec % 10)).ToString();
         }
 
         public void GameOver()
