@@ -44,6 +44,7 @@ namespace GridSystem
 
         private void SetWallInGrid(GridFactory gridFactory)
         {
+            gridFactory.RemoveEmptyGridObject(x, y);
             gridFactory.SetGridObject(x, y, gridFactory.wallPrefab, true);
         }
 
