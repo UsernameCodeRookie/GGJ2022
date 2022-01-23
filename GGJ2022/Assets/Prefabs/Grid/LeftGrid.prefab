@@ -82,7 +82,7 @@ MonoBehaviour:
   LeftOrRight: 1
   wallPrefab: {fileID: 5005168806409928148, guid: da3375bc5f2f2694c97d56667f863982, type: 3}
   playerPrefab: {fileID: 3813551134934191269, guid: 39638df82ec25d14bad01cdfb8becfea, type: 3}
-  fruitPrefab: {fileID: 4231940020290734356, guid: 0641baa196b7db44db3c0e5ba78218b3, type: 3}
+  fruitPrefab: {fileID: 2600305789697248784, guid: 48b78593c8456004eaecf58059312f83, type: 3}
   emptyPosition: []
 --- !u!114 &3649461024085395115
 MonoBehaviour:
