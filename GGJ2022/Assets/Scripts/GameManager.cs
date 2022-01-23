@@ -25,10 +25,17 @@ public class GameManager : MonoBehaviour
     [Header("Fruits")]
     public List<Fruit> fruitsL, fruitsR;
 
+    [Header("GameSetting")]
     public UnityEvent GameStart;
     public UnityEvent GameOver;
 
     public GameOverType winner;
+
+    public AnimationCurve curve;
+    public float totalTime;
+    [HideInInspector]
+    public float timer;
+
 
     public enum GameOverType
     {
@@ -39,6 +46,7 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         GameStart.AddListener(() => GridInitial());
+        GameStart.AddListener(() => timer = 0);
         GameOver.AddListener(() => WhoWins());
     }
 
@@ -49,6 +57,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        timer += Time.deltaTime;
+
         right.rootPosition.position =
             new Vector3(5 - (left.rootPosition.position.x + 5) - width * cellSize, left.rootPosition.position.y, 0);
 
@@ -74,6 +84,11 @@ public class GameManager : MonoBehaviour
     {
         winner = playerScriptL.hp > playerScriptR.hp ? GameOverType.LeftWin :
                  playerScriptL.hp < playerScriptR.hp ? GameOverType.RightWin : GameOverType.Draw;
+    }
+
+    public float SpeedMultiply()
+    {
+        return curve.Evaluate(timer/totalTime);
     }
 
     #region GenerateFruit

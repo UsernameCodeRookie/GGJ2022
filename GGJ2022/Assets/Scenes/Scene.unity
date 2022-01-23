@@ -1818,6 +1818,32 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   winner: 0
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0023345947
+      value: 1.0184937
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.9973755
+      value: 2.0100708
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  totalTime: 180
+  timer: 0
 --- !u!4 &1632937755
 Transform:
   m_ObjectHideFlags: 0

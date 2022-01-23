@@ -49,8 +49,8 @@ namespace Gameplay
             {
                 Horizontal = "Horizontal R";
                 Vertical = "Vertical R";
-                rushKey = KeyCode.Alpha1;
-                attackKey = KeyCode.Alpha2;
+                rushKey = KeyCode.Keypad1;
+                attackKey = KeyCode.Keypad2;
             }
         }
 
@@ -59,8 +59,11 @@ namespace Gameplay
             if (Input.GetKey(rushKey))
             {
                 isRushing = true;
-                if(playerScript.SpDrop())
+                playerScript.SpDrop();
+                if (playerScript.sp > 0f)
                     speed = playerScript.rushSpeed;
+                else
+                    speed = playerScript.speed;
             }
             else
             {
@@ -83,7 +86,7 @@ namespace Gameplay
             Vector3 moveInput = new Vector3(Input.GetAxis(Horizontal), Input.GetAxis(Vertical), 0);
             if (moveInput != Vector3.zero & !loseControl)
                 direction = moveInput.normalized;
-            transform.Translate(direction * speed * Time.deltaTime);
+            transform.Translate(direction * speed * Time.deltaTime * GameManager.instance.SpeedMultiply());
         }
 
         private void OnCollisionEnter2D(Collision2D collision)

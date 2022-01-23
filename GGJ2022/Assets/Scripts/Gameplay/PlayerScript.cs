@@ -39,23 +39,14 @@ namespace Gameplay
 			sp = data.maxSp;
 			mp = 0;
 			hp = data.maxHp;
+			availableAttackCount = 1;
 
 			spDecreaseAmount = data.SpDecreaseAmount;
 		}
 
-		public bool SpDrop()
+		public void SpDrop()
 		{
-			sp -= spDecreaseAmount * Time.deltaTime;
-
-			if (sp > 0)
-			{
-				return true;
-			}
-			else
-			{
-				sp = 0;
-				return false;
-			}
+			sp = Mathf.Max(0f, sp - spDecreaseAmount * Time.deltaTime);
 		}
 
 		public void Upd()
@@ -70,7 +61,7 @@ namespace Gameplay
             if (mp > data.maxMp)
             {
                 mp = 0;
-                availableAttackCount++;
+				availableAttackCount = Mathf.Min(data.atkCnt, availableAttackCount + 1);
             }
 			sp += data.spRecover;
             if (sp > data.maxSp)

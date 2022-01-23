@@ -47,8 +47,8 @@ namespace UI
 
         public void Initialize()
         {
-            min = 3;
-            sec = 0;
+            min = (int)GameManager.instance.totalTime / 60;
+            sec = (int)GameManager.instance.totalTime % 60;
         }
     }
 }
