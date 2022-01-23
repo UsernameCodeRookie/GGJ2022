@@ -50,8 +50,8 @@ namespace Gameplay
             {
                 Horizontal = "Horizontal R";
                 Vertical = "Vertical R";
-                rushKey = KeyCode.Alpha1;
-                attackKey = KeyCode.Alpha2;
+                rushKey = KeyCode.Period;
+                attackKey = KeyCode.Slash;
             }
 
             mCamera = Camera.main;
