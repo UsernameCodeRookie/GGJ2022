@@ -18,7 +18,7 @@ MonoBehaviour:
   maxSp: 10
   maxMp: 6
   maxHp: 3
-  mpRate: 5
+  mpRate: 0.5
   atkCnt: 2
   spRecover: 1.5
   mpRecover: 2
