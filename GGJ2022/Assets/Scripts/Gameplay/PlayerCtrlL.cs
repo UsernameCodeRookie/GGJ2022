@@ -4,13 +4,15 @@ using UnityEngine;
 using Gameplay;
 
 public class PlayerCtrlL:MonoBehaviour{
+	public GameUI UI;
+	
 	private PlayerScript sc;
 	private Vector3 dir;
 	
     void Start(){
         dir=new Vector3(0,-1,0);
 		sc=gameObject.GetComponent<PlayerScript>();
-		sc.Init();
+		sc.Init(false);
     }
 	
     void Update(){
