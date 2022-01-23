@@ -52,8 +52,6 @@ public class GameManager : MonoBehaviour
             GridInitial();
             timer = 0;
             isPlaying = true;
-            //GeneratFruit(left, fruitGenerateL, fruitsL);
-            //GeneratFruit(right, fruitGenerateR, fruitsR);
         });
 
         GameOver.AddListener(() =>
@@ -91,6 +89,15 @@ public class GameManager : MonoBehaviour
 
             WhoWins();
         }
+    }
+
+    public void Reset()
+    {
+        if (left != null) GameObject.Destroy(left.gameObject);
+        if (right != null) GameObject.Destroy(right.gameObject);
+        fruitsL.Clear();
+        fruitsR.Clear();
+        GameStart.Invoke();
     }
 
     private void WhoWins()

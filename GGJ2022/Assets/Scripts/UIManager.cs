@@ -29,13 +29,14 @@ public class UIManager:MonoBehaviour{
 	}
 	
 	public void GameReset(){
-		gameManager.GameStart.Invoke();
 		state=2;
 		startUI.SetActive(false);
 		endUI.SetActive(false);
 		playUI.SetActive(true);
 		pauseUI.SetActive(false);
-//		gameMgr.SetActive(true);
+		gameMgr.SetActive(true);
+
+		gameManager.Reset();
 	}
 	
 	public void GameEnd(){
