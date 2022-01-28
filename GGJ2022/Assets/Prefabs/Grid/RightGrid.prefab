@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 3752316042683146404}
   - component: {fileID: 3752316042683146405}
   - component: {fileID: 5965833246891565183}
+  - component: {fileID: -72146809623361046}
   m_Layer: 0
   m_Name: RightGrid
   m_TagString: RightGrid
@@ -83,7 +84,6 @@ MonoBehaviour:
   wallPrefab: {fileID: 4231940020290734356, guid: 0641baa196b7db44db3c0e5ba78218b3, type: 3}
   playerPrefab: {fileID: 1479682204570871418, guid: 44b2a5691b354b14cb8d9528040589db, type: 3}
   fruitPrefab: {fileID: 4622636853887829289, guid: 0a2fc7349f758f04492f952e7981461c, type: 3}
-  emptyPosition: []
 --- !u!114 &5965833246891565183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,6 +107,24 @@ MonoBehaviour:
   UpdateTimerEvent:
     m_PersistentCalls:
       m_Calls: []
+  fruitGenerateSO: {fileID: 11400000, guid: abb2ff7ad48dd9b4a98fd813fed335b7, type: 2}
+--- !u!114 &-72146809623361046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3752316042683146458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc00cb85bec15804ca09ad7cc03f87b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fruits:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  currentFruitsNumber: 0
 --- !u!1 &8251070698078932739
 GameObject:
   m_ObjectHideFlags: 0

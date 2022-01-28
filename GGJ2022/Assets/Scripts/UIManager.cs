@@ -36,7 +36,7 @@ public class UIManager:MonoBehaviour{
 		pauseUI.SetActive(false);
 		gameMgr.SetActive(true);
 
-		gameManager.Reset();
+		gameManager.GameReset.Invoke();
 	}
 	
 	public void GameEnd(){

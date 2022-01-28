@@ -58,19 +58,19 @@ namespace GridSystem
 
         private void SetWallInGrid(GridFactory gridFactory)
         {
-            gridFactory.RemoveEmptyGridObject(x,y);
-            gridFactory.SetGridObject(x, y, gridFactory.wallPrefab, true);
+            gridFactory.RemoveEmptyPosition(x, y);
+            gridFactory.SetGridObject<Wall>(x, y, gridFactory.wallPrefab);
         }
 
         public void Disappear()
         {
             if (LeftOrRight)
             {
-                left.SetEmptyGridObject(x, y);
+                left.AddEmptyPostion(x, y);
             }
             else
             {
-                right.SetEmptyGridObject(x, y);
+                right.AddEmptyPostion(x, y);
             }
             if (gameObject != null)
                 GameObject.Destroy(gameObject);

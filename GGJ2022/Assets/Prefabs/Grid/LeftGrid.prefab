@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 375506967164807915}
   - component: {fileID: 375506967164807912}
   - component: {fileID: 3649461024085395115}
+  - component: {fileID: 2870343319707745104}
   m_Layer: 0
   m_Name: LeftGrid
   m_TagString: LeftGrid
@@ -83,7 +84,6 @@ MonoBehaviour:
   wallPrefab: {fileID: 5005168806409928148, guid: da3375bc5f2f2694c97d56667f863982, type: 3}
   playerPrefab: {fileID: 3813551134934191269, guid: 39638df82ec25d14bad01cdfb8becfea, type: 3}
   fruitPrefab: {fileID: 2600305789697248784, guid: 48b78593c8456004eaecf58059312f83, type: 3}
-  emptyPosition: []
 --- !u!114 &3649461024085395115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,6 +107,24 @@ MonoBehaviour:
   UpdateTimerEvent:
     m_PersistentCalls:
       m_Calls: []
+  fruitGenerateSO: {fileID: 11400000, guid: abb2ff7ad48dd9b4a98fd813fed335b7, type: 2}
+--- !u!114 &2870343319707745104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375506967164807913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc00cb85bec15804ca09ad7cc03f87b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fruits:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  currentFruitsNumber: 0
 --- !u!1 &7967686699655457657
 GameObject:
   m_ObjectHideFlags: 0

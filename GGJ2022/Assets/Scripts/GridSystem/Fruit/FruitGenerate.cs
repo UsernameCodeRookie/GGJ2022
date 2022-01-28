@@ -21,7 +21,14 @@ namespace GridSystem
         [Range(0, 1)]
         public float amountTimer;
 
-        public UnityEvent UpdateTimerEvent;
+        public UnityEvent GenerateFruitEvent;
+        public FruitGenerateSO fruitGenerateSO;
+
+        private void Awake()
+        {
+            SetValue(fruitGenerateSO);
+            GenerateFruitEvent.AddListener(() => generateTimer = 0);
+        }
 
         private void Update()
         {
@@ -45,7 +52,7 @@ namespace GridSystem
             while(generateTimer > 1)
             {
                 generateTimer -= 1;
-                UpdateTimerEvent.Invoke();
+                GenerateFruitEvent.Invoke();
 
                 frequencyTimer += frequencyVelocity;
                 amountTimer += amountVelocity;

@@ -24,6 +24,13 @@ namespace GridSystem
             yield return 0;
         }
 
+        private FruitManager fruitManager;
+
+        public void SetFruitManager(FruitManager fruitManager)
+        {
+            this.fruitManager = fruitManager;
+        }
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
             var p = collision.gameObject.GetComponent<PlayerController>();
@@ -37,21 +44,20 @@ namespace GridSystem
             {
                 SetWallInGrid(left);
             }
-            gameManager.fruitsL.Remove(this);
-            gameManager.fruitsR.Remove(this);
+            fruitManager.RemoveFruit(this);
             Disappear();
         }
 
         private void SetWallInGrid(GridFactory gridFactory)
         {
-            gridFactory.RemoveEmptyGridObject(x, y);
-            gridFactory.SetGridObject(x, y, gridFactory.wallPrefab, true);
+            gridFactory.RemoveEmptyPosition(x, y);
+            gridFactory.SetGridObject<Wall>(x, y, gridFactory.wallPrefab);
         }
 
         public void Disappear()
         {
-            left.SetEmptyGridObject(x, y);
-            right.SetEmptyGridObject(x, y);
+            left.AddEmptyPostion(x, y);
+            right.AddEmptyPostion(x, y);
             if(gameObject != null)
                 GameObject.Destroy(gameObject);
         }
