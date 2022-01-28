@@ -4,12 +4,12 @@ using UnityEngine;
 using Gameplay;
 
 public class PlayerCtrlR:MonoBehaviour{
-	private PlayerScript sc;
+	private PlayerRuntimeDataSO sc;
 	private Vector3 dir;
 	
     void Start(){
         dir=new Vector3(0,1,0);
-		sc=gameObject.GetComponent<PlayerScript>();
+		sc=gameObject.GetComponent<PlayerRuntimeDataSO>();
 		sc.Init(false);
     }
 	

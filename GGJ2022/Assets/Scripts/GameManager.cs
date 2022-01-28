@@ -15,18 +15,19 @@ public class GameManager : MonoBehaviour
     public int height;
     public float cellSize;
     private FruitGenerate fruitGenerateL, fruitGenerateR;
-    public FruitGenerateSO fruitGenerateSO;
+    public FruitGenerateConfigSO fruitGenerateSO;
 
     [HideInInspector]
     public Vector3 originOffset;
     [HideInInspector]
-    public PlayerScript playerScriptL, playerScriptR;
+    public PlayerRuntimeDataSO playerScriptL, playerScriptR;
 
     [Header("Fruits")]
     public List<Fruit> fruitsL, fruitsR;
 
     [Header("GameSetting")]
     public UnityEvent GameStart;
+    public UnityEvent GameReset;
     public UnityEvent GameOver;
 
     public GameOverType winner;
@@ -57,9 +58,9 @@ public class GameManager : MonoBehaviour
         GameOver.AddListener(() =>
         {
             WhoWins();
-            DestroyGrid();
-            fruitsL.Clear();
-            fruitsR.Clear();
+            //DestroyGrid();
+            //fruitsL.Clear();
+            //fruitsR.Clear();
             isPlaying = false;
         });
     }
@@ -80,11 +81,12 @@ public class GameManager : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.R))
             {
-                if (left != null) GameObject.Destroy(left.gameObject);
-                if (right != null) GameObject.Destroy(right.gameObject);
-                fruitsL.Clear();
-                fruitsR.Clear();
-                GameStart.Invoke();
+                //if (left != null) GameObject.Destroy(left.gameObject);
+                //if (right != null) GameObject.Destroy(right.gameObject);
+                //fruitsL.Clear();
+                //fruitsR.Clear();
+
+                Reset();
             }
 
             WhoWins();
@@ -93,12 +95,15 @@ public class GameManager : MonoBehaviour
 
     public void Reset()
     {
-        if (left != null) GameObject.Destroy(left.gameObject);
-        if (right != null) GameObject.Destroy(right.gameObject);
-        fruitsL.Clear();
-        fruitsR.Clear();
+        //if (left != null) GameObject.Destroy(left.gameObject);
+        //if (right != null) GameObject.Destroy(right.gameObject);
+        //fruitsL.Clear();
+        //fruitsR.Clear();
+        DestroyGrid();
+        GameReset.Invoke();
         GameStart.Invoke();
     }
+
 
     private void WhoWins()
     {
@@ -117,7 +122,8 @@ public class GameManager : MonoBehaviour
         if (left != null) GameObject.Destroy(left.gameObject);
         if (right != null) GameObject.Destroy(right.gameObject);
 
-        
+        fruitsL.Clear();
+        fruitsR.Clear();
     }
 
     #region GenerateFruit

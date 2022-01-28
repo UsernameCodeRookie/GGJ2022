@@ -14,7 +14,7 @@ namespace GridSystem
         private void Awake()
         {
             instance = this;
-            GameManager.instance.GameOver.AddListener(() => DestroyBoundary());
+            GameManager.instance.GameReset.AddListener(() => DestroyBoundary());
         }
 
         public void DestroyBoundary()

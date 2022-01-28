@@ -17,7 +17,7 @@ namespace Gameplay
 
         private Collider2D playerCollider;
 
-        public AttackSO so;
+        public AttackConfigSO so;
         private MMFeedbacks mMFeedbacks;
 
         void Awake()

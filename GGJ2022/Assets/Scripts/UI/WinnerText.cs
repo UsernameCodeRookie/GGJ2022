@@ -16,8 +16,8 @@ namespace UI
         {
             GameManager gameManager = GameManager.instance;
 
-            text.text = gameManager.winner == GameManager.GameOverType.LeftWin ? "Winner: White" :
-                        gameManager.winner == GameManager.GameOverType.RightWin ? "Winner: Black" : "Draw";
+            text.text = gameManager.winner == GameManager.GameOverType.LeftWin ? "   小阳获胜 ！" :
+                        gameManager.winner == GameManager.GameOverType.RightWin ? "   小阴获胜 ！" : "平手 ！";
         }
 
     }

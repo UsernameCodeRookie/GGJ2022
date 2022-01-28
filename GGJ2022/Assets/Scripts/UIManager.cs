@@ -21,11 +21,17 @@ public class UIManager:MonoBehaviour{
 //		gameMgr.GetComponent<GameManager>().GameOver.AddListener(GameEnd);
 
 		gameManager = gameMgr.GetComponent<GameManager>();
-		gameManager.GameOver.AddListener(GameEnd);
+		gameManager.GameOver.AddListener(End);
 	}
 	
     void Update(){
-		if(state==2&&Input.GetKey("escape"))GamePause();
+		if(gameManager.isPlaying && Input.GetKeyDown("escape"))
+        {
+			if (state != 3)
+				Pause();
+			else
+				Resume();
+        }
 	}
 	
 	public void GameReset(){
@@ -34,7 +40,7 @@ public class UIManager:MonoBehaviour{
 		endUI.SetActive(false);
 		playUI.SetActive(true);
 		pauseUI.SetActive(false);
-		gameMgr.SetActive(true);
+		Time.timeScale = 1;
 
 		gameManager.Reset();
 	}
@@ -72,6 +78,27 @@ public class UIManager:MonoBehaviour{
 		helpUI.GetComponent<HelpUI>().frame = 0;
     }
 
+	public void Pause()
+    {
+		state = 3;
+		pauseUI.SetActive(true);
+		Time.timeScale = 0;
+	}
+
+	public void Resume()
+    {
+		state = 2;
+		pauseUI.SetActive(false);
+		Time.timeScale = 1;
+    }
+
+	public void End() 
+	{
+		state = 1;
+		endUI.SetActive(true);
+		Time.timeScale = 0;
+	}
+    
 	public void GameExit(){
 		Application.Quit();
 	}

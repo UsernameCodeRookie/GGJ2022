@@ -12,30 +12,35 @@ namespace Gameplay
         private float speed;
         private float attackRadius;
 
-        public PlayerScript playerScript;
+        public PlayerRuntimeDataSO playerScript;
 
         private string Horizontal, Vertical;
         private KeyCode rushKey, attackKey;
         public bool LeftOrRight;
 
+        [Header("State")]
         public bool loseControl;
         public bool isRushing;
 
+        [Header("Attack Prefab")]
         public Attack attackPrefab;
         public _Attack _attackPrefab;
 
-        public UnityEvent AttackEvent;
 
-        public Camera mCamera;
-        public CameraController cameraController;
-        //public UnityAction cameraShakeAction;
+        [Header("Events")]
+        public UnityEvent AttackEvent;
+        public GameEventSO playerGainAtkCnt;
+
+        //[Header()]
+        private Camera mCamera;
+        private CameraController cameraController;
 
         private void Start()
         {
             direction = new Vector3(0, -1f, 0);
 
             playerScript.Init(LeftOrRight);
-            attackRadius = playerScript.data.atkRad;
+            attackRadius = playerScript.data.attackRadius;
             AttackEvent.AddListener(() => playerScript.DecreaseAvailableAttackCount());
             AttackEvent.AddListener(() => Instantiate(attackPrefab).Init(transform.position, attackRadius));
             AttackEvent.AddListener(() => Instantiate(_attackPrefab).Init(transform.position, attackRadius, LeftOrRight));
@@ -124,9 +129,9 @@ namespace Gameplay
             float loseControlProgress;
             loseControl = true;
             render.color = new Color(render.color.r, render.color.g, render.color.b, 0.3f);
-            for (loseControlProgress = 0; loseControlProgress < playerScript.data.LoseControlTime; loseControlProgress += Time.deltaTime)
+            for (loseControlProgress = 0; loseControlProgress < playerScript.data.loseControlTime; loseControlProgress += Time.deltaTime)
             {
-                var ratio = loseControlProgress / playerScript.data.LoseControlTime;
+                var ratio = loseControlProgress / playerScript.data.loseControlTime;
                 render.color = new Color(render.color.r, render.color.g, render.color.b, 0.3f + 0.7f * ratio);
                 yield return 0;
             }

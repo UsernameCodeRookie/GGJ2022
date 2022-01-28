@@ -26,23 +26,34 @@ public class AudioController : MonoBehaviour
     {
         BGMSource = gameObject.GetComponentInChildren<AudioSource>();
         BGMSet.Items[0].Play(BGMSource);
+        gameManager = GameManager.instance;
+        gameManager.GameOver.AddListener(SwitchEndBGM);
+        gameManager.GameStart.AddListener(SwitchStartBGM);
+    }
+
+    private void Awake()
+    {
     }
 
     // Update is called once per frame
     void Update()
     {
-        SwitchBGM();
+        //SwitchStartBGM();
         AdjustBGMPitch();   
     }
 
-    private void SwitchBGM()
+    private void SwitchStartBGM()
     {
-        gameManager = GameManager.instance;
-        if (gameManager.isPlaying && !isPlayingMainBGM)
-        {
-            isPlayingMainBGM = true;
+        //    if (gameManager.isPlaying && !isPlayingMainBGM)
+        //    {
+        //    }
+        isPlayingMainBGM = true;
             BGMSet.Items[1].Play(BGMSource);
-        }
+    }
+
+    private void SwitchEndBGM()
+    {
+        BGMSet.Items[2].Play(BGMSource);
     }
 
     private void AdjustBGMPitch()

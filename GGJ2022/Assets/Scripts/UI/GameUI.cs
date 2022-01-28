@@ -9,8 +9,6 @@ using Gameplay;
 public class GameUI : MonoBehaviour{
 //	public string path="Assets\\GameAssets\\Textures\\UI\\White";
 //	public string playerName="LeftGrid/Origin/PlayerL";
-    public PlayerScript sc;
-	public string path;
 //	public int hpVal,skillCnt;
 //	public float mpVal,spVal,spMax=5f;
 	
@@ -19,10 +17,17 @@ public class GameUI : MonoBehaviour{
 	private Texture2D[] mp=new Texture2D[7],hp=new Texture2D[4],skill=new Texture2D[4];
 	private Texture2D spBar;
 */
+    
+	public PlayerRuntimeDataSO playerScript;
+	public string path;
+
 	public List<Texture2D> mp,hp,skill;
 	public Texture2D spBar;
 
 	RawImage mpTar, hpTar, skillTar;
+
+	//[Header("Event Listener")]
+	//public GameEventListener playerGainAtkCnt;
 
     void Start(){
 		/*
@@ -57,19 +62,19 @@ public class GameUI : MonoBehaviour{
 		skillTar = transform.Find("skill").GetComponent<RawImage>();
 	}
 	
-    public void Init(PlayerScript t){
+    public void Init(PlayerRuntimeDataSO t){
 //		GameObject tar=GameObject.Find(playerName);
 //		sc=t;
 	}
 	
     void Update(){
-		mpTar.texture=mp[Mathf.FloorToInt(sc.mp)];
-		hpTar.texture=hp[sc.hp];
-		skillTar.texture=skill[sc.availableAttackCount];
+		mpTar.texture=mp[Mathf.FloorToInt(playerScript.mp)];
+		hpTar.texture=hp[playerScript.hp];
+		skillTar.texture=skill[playerScript.availableAttackCount];
 
 		var spMTar=transform.Find("spBarMid");
-		spMTar.localScale=new Vector3(0.3925f*sc.sp/sc.data.maxSp,0.08750676f,1);
+		spMTar.localScale=new Vector3(0.3925f*playerScript.sp/playerScript.data.maxSp,0.08750676f,1);
     	var spRTar=transform.Find("spBarRight");
-		spRTar.localPosition=new Vector3(39.23f*sc.sp/sc.data.maxSp-17.73f,-18.24f,0);
+		spRTar.localPosition=new Vector3(39.23f*playerScript.sp/playerScript.data.maxSp-17.73f,-18.24f,0);
     }
 }

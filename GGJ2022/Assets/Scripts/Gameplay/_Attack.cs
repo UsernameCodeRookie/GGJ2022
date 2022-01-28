@@ -19,7 +19,7 @@ namespace Gameplay
         private bool LeftOrRight;
 
         private AnimationCurve curve;
-        public AttackSO so;
+        public AttackConfigSO so;
         private MMFeedbacks mMFeedbacks;
 
         void Awake()

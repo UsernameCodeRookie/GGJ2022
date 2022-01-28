@@ -28,7 +28,7 @@ namespace GridSystem
             UpdateTimer();
         }
 
-        public void SetValue(FruitGenerateSO fruitGenerateSO)
+        public void SetValue(FruitGenerateConfigSO fruitGenerateSO)
         {
             generateFrequency = fruitGenerateSO.generateFrequency;
             generateAmount = fruitGenerateSO.generateAmount;

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59f755008f3a4224ea6683ca68a7f29d, type: 3}
   m_Name: MainBGM
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 2a0c89a488405714f908ac074fd163d5, type: 3}
+  clip: {fileID: 8300000, guid: 2aeab33ef36bdc344a5b66f02095a5ab, type: 3}
   clipName: 
   volume: 0.3
   pitch: 1
